@@ -1,0 +1,125 @@
+* {
+	box-sizing: border-box;
+}
+
+.ui-detail-header {
+	background: #fff none repeat scroll 0 0;
+	border: 1px solid #e8e8e8;
+	margin: 0 auto;
+	padding-left: 24px;
+	width: 980px;
+}
+
+.ui-detail-header .ui-header-content {
+	height: 393px;
+	position: relative;
+}
+
+.ui-detail-header .ui-header-content .ui-content-img {
+	float: left;
+	height: 393px;
+	line-height: 393px;
+	padding: 37px 0;
+	text-align: center;
+	width: 214px;
+}
+
+.ui-detail-header .ui-header-content .ui-content-detail {
+	float: left;
+	height: 393px;
+	padding: 37px 0 37px 30px;
+	width: 580px;
+}
+
+.ui-detail-content {
+	margin: -10px auto 90px;
+	width: 980px;
+}
+
+.ui-detail-content .ui-template {
+	background: #fff none repeat scroll 0 0;
+	border-bottom: 1px solid #e8e8e8;
+	margin-top: 10px;
+	padding-left: 24px;
+}
+
+.ui-detail-content h5::after {
+	background: #31c37c none repeat scroll 0 0;
+	bottom: -1px;
+	content: "";
+	display: block;
+	height: 4px;
+	left: 0;
+	position: absolute;
+	width: 60px;
+}
+
+.ui-detail-content h5 {
+	border-bottom: 1px solid #e8e8e8;
+	height: 46px;
+	line-height: 46px;
+	position: relative;
+}
+
+.ui-detail-content .ui-publisher .ui-publisher-name {
+	display: inline-block;
+}
+
+/* .ui-detail-content .ui-template .ui-template-info {
+	height: 80px;
+	line-height: 160px;
+} */
+ .ui-template-info {
+    height: 80px;
+}
+
+.ui-detail-content .ui-publisher .ui-publisher-logo {
+	background: #ccc none repeat scroll 0 0;
+	border-radius: 50%;
+	display: inline-block;
+	height: 68px;
+	margin-right: 20px;
+	overflow: hidden;
+	vertical-align: middle;
+	width: 68px;
+}
+
+.ui-detail-content .ui-activity-detail {
+	background: #fff none repeat scroll 0 0;
+	border-bottom: 1px solid #e8e8e8;
+	margin-top: -10px;
+	padding: 0 30px 0 24px;
+}
+
+.ui-detail-content .ui-activity-detail .ui-activity-content {
+	font-size: 14px;
+	margin-bottom: 22px;
+}
+
+.ui-detail-content .ui-activity-detail p {
+	line-height: 28px;
+}
+
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
+
+.foot {
+	background-color: #51a351;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin-bottom: 20px;
+	min-height: 20px;
+	padding: 19px;
+	text-align: center;
+	color: #ccc;
+}
+
+footer a {
+    color: #ccc;
+    text-decoration: none;
+}
+

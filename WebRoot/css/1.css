@@ -1,0 +1,23 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*基本信息*/
+
+
+
+#menua {padding:20px 20px 0 0}
+/*利用padding:20px 20px 0 0来固定菜单位置*/
+#menua ul {float:right;list-style:none;margin:0px;}
+/*添加了float:right使得菜单位于页面右侧*/
+#menua ul li {float:left;margin:0 10px;display:block;line-height:28px}
+.menuDiva {width:1px;height:28px;background:#999}
+#menua ul li a:link,#menu ul li a:visited {font-weight:bold;color:#666}
+#menua ul li a:hover{color:#f0f;}
+.erji_ula{display:none;}
+#menua ul li:hover .erji_ula{display:block;}
+
+
+
+
+
+
+

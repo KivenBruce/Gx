@@ -1,0 +1,28 @@
+#myul {
+	list-style-type: none;
+	padding: 5px 10px;
+}
+
+#countinfo {
+	float: right;
+	margin-right: -80px;
+	margin-top: -35px;
+	display: none;
+	background-color: white;
+	height: 55px;
+	border-radius: 20px;
+}
+
+#count {
+	color: red;
+	float: right;
+	margin-right: -50px;
+	margin-top: 50px;
+}
+
+#q {
+	margin-top: 52px;
+	margin-left: 120px;
+	width: 280px;
+	height: 29px;
+}

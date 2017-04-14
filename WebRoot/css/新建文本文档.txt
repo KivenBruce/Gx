@@ -1,0 +1,20 @@
+ul.drdw li a {
+border: 0 !important;
+}
+
+
+ul.drdw li a {
+	font-size: 1em;
+	color: #000;
+	padding: 0.3em 0.5em;
+	text-align:left;
+}
+
+ul.drdw li a:hover{
+	color:#32bcad;
+	border-bottom:none;
+}
+
+ul.drdw li {
+	background:rgba(101, 115, 120, 0.66);
+}
