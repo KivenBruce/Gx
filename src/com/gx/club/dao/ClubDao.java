@@ -12,6 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.log4j.Logger;
 
 import com.gx.club.domain.Club;
 import com.gx.club.domain.Comment;
@@ -23,7 +24,7 @@ import cn.itcast.jdbc.TxQueryRunner;
 
 public class ClubDao {
 	private QueryRunner qr = new TxQueryRunner();
-
+	Logger log=Logger.getLogger(this.getClass());
 
 	/**
 	 * 查询所有club
@@ -74,10 +75,10 @@ public class ClubDao {
 			}
 			qr.update(sql);
 		} else {
-			sql = "insert into club(club_name,club_id,user_id,isfocus,gflag,club_parent,parent_id,comment_count,like_count"
-					+ ",club_image,user_image,club_desc,club_hoster) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "insert into club(club_name,club_id,user_id,isfocus,gflag,club_parent,parent_id"
+					+ ",club_image,club_desc,club_hoster) values(?,?,?,?,?,?,?,?,?,?)";
 			Object[] params = { club.getClub_name(), club.getClub_id(), userid, 1, club.getGflag(),
-					club.getClub_parent(),club.getParent_id(),0,0,club.getClub_image(),club.getClub_desc(),club.getClub_hoster()};
+					club.getClub_parent(),club.getParent_id(),club.getClub_image(),club.getClub_desc(),club.getClub_hoster()};
 			try {
 				this.qr.update(sql, params);
 			} catch (SQLException e) {
@@ -85,7 +86,6 @@ public class ClubDao {
 			}
 
 		}
-
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class ClubDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Map<String, Object>> findCount(boolean flag, int parentid, int id) throws SQLException {
+	public List<Map<String, Object>> findCount() throws SQLException {
 		String sql = "select club_id,count(*) as count from  club where isfocus=1 GROUP BY club_id";
 		List<Map<String, Object>> list = qr.query(sql, new MapListHandler());
 		System.out.println(list);
@@ -111,6 +111,46 @@ public class ClubDao {
 		return list;
 	}
 
+	
+	/**
+	 * 查询用户关注的club的详细信息
+	 * 
+	 * @param flag
+	 * @param parentid
+	 * @param id
+	 * @param question
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Club> findByUserId(int id) throws SQLException {
+		String sql="select * from club where user_id="+id+" and isfocus=1";	
+		List<Club> listClub = qr.query(sql, new BeanListHandler<Club>(Club.class));
+		PageBean<Club> pb = new PageBean<Club>();
+		pb.setBeanList(listClub);
+		return pb;
+	}
+	
+	/**
+	 * 根据userid查找用户点赞数
+	 * @param userid
+	 * @return
+	 */
+	public int findLikeCountById(int userid){
+		String sql="select sum(like_count) from comment where user_id="+userid;
+		int likecount=0;
+		try {
+			Number n=(Number) qr.query(sql, new ScalarHandler());
+			if(n!=null){
+				likecount=n.intValue();
+			}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.debug("查找用户总点赞数出错!!!!!!!");
+			e.printStackTrace();
+		}
+		return likecount;
+	}
+	
 	/**
 	 * 查询用户已关注的clubId编号以及数量.size
 	 * {club_idclub_id,,,,}

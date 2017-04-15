@@ -9,8 +9,6 @@ public class Club {
 	private int gflag;
 	private String club_parent;
 	private int parent_id;
-	private int comment_count;
-	private int like_count;
 	private String club_image;
 	private String club_desc;
 	private String club_hoster;
@@ -80,23 +78,7 @@ public class Club {
 		this.parent_id = parent_id;
 	}
 
-	public int getComment_count() {
-		return comment_count;
-	}
 
-	public void setComment_count(int comment_count) {
-		this.comment_count = comment_count;
-	}
-
-	public int getLike_count() {
-		return like_count;
-	}
-
-	public void setLike_count(int like_count) {
-		this.like_count = like_count;
-	}
-
-	
 
 	public String getClub_image() {
 		return club_image;

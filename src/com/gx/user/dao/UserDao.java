@@ -148,26 +148,28 @@ public class UserDao {
 	}
 
 	public void resetPass(User user, String passEncode) {
-		String sql = "update guser set Gpwd=? where Gusername=?";
+		String sql = "update guser set Gpwd=? where gid=?";
 		try {
-			this.qr.update(sql, new Object[] { passEncode, user.getGusername() });
+			this.qr.update(sql, new Object[] { passEncode, user.getId() });
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
+
 	public void resetPass(String gid) {
 		String sql = "update guser set Gpwd=? where id=?";
 		try {
-			this.qr.update(sql, PageConstants.INITAL_PASSWORD,gid);
+			this.qr.update(sql, PageConstants.INITAL_PASSWORD, gid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public void editUser(User user, String gid) throws SQLException {
-		String sql = "update guser set Gusername=?,level=?, Gmail=?, Gtel=? where id=?";
+		String sql = "update guser set Gusername=?,level=?, Gmail=?, Gtel=? ,Gimage=?,Gtitle=? where id=?";
 		try {
-			qr.update(sql, user.getGusername(), user.getLevel(), user.getGmail(), user.getGtel(), gid);
+			qr.update(sql, user.getGusername(), user.getLevel(), user.getGmail(), user.getGtel(), user.getGimage(),
+					user.getGtitle(), gid);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

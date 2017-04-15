@@ -181,11 +181,11 @@
 						<c:forEach var="item" items="${commentList.beanList}" varStatus="cstatus">
 							<c:forEach var="likeitem" items="${likeList}" varStatus="lstatus">
 							<c:if test="${cstatus.index==lstatus.index }">
-								<li class="ui-status-list ui-habit-status">
+								<li class="ui-status-list ui-habit-status" id="${item.id}">
 									<div class="ui-oper-info">
 										<div class="ui-oper-logo">
 											<a href="javascript:;"> <img
-												src="ClubServlet?method=doImage&filepath=${item.user_image}"
+												src="ClubServlet?method=doImage&filepath=${item.gimage}"
 												alt="">
 											</a>
 										</div>
@@ -193,7 +193,7 @@
 											<h3>
 												<a href="javascript:;"><b>${item.user_name}</b></a>
 											</h3>
-											<p>${item.user_title}</p>
+											<p>${item.gtitle}</p>
 										</div>
 
 									</div>

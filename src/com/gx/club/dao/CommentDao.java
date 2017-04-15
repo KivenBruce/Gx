@@ -34,7 +34,7 @@ public class CommentDao {
 	 * @throws SQLException
 	 */
 	public PageBean<Comment> getCommentList(String clubid, int pc) throws SQLException {
-		String sql = "select * from comment where club_id=? order by comment_time desc limit ?,?";
+		String sql = "select comment.* ,guser.gimage,guser.gtitle from comment ,guser where club_id=? and comment.user_id=guser.id order by comment_time desc limit ?,?";
 		String sql1 = "select count(*) from comment where club_id=?";
 		Number num = (Number) qr.query(sql1, new ScalarHandler(), clubid);
 		int tr = num.intValue();
@@ -58,7 +58,7 @@ public class CommentDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void addCommentList(Comment comment) throws SQLException {
+	public void addComment(Comment comment) throws SQLException {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String commentDate = sdf.format(date);
@@ -66,6 +66,23 @@ public class CommentDao {
 		Object[] params = { comment.getUser_id(), comment.getClub_id(), comment.getContent(), commentDate,
 				comment.getUser_name() };
 		qr.update(sql, params);
+	}
+	
+	public int getCommentCount(int userid){
+		 String sql="select count(*) from comment where user_id="+userid;
+		 int commentCount = 0;
+		 try {
+			Number n=(Number) qr.query(sql, new ScalarHandler());
+			if(n==null){
+				commentCount=0;
+			}else{
+				commentCount=n.intValue();
+			}
+		} catch (SQLException e) {
+			log.debug("获取用户总评论数失败!!!");
+			e.printStackTrace();
+		}
+		return commentCount;
 	}
 
 	/**

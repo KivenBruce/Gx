@@ -10,7 +10,7 @@ function judge(){
 	return true;
 }
 
-function confirmDelete(commentid){
+function confirmDelete(commentid){//删除评论
 	//alert(commentid);
 	if (confirm("你确认要删除这条活动?")) {
 		$.ajax({
@@ -23,14 +23,15 @@ function confirmDelete(commentid){
 			async : false,
 			
 			success:function(result){
-				window.location.reload();
+				//window.location.reload();
+				$("#"+commentid).hide();
 			},error:function(){
 				alert("error");
 			}
 		});	
 	}
 }
-$(function(){
+$(function(){//点赞变化
 	$(".ui-action-box").click(function(){
 		//alert("hello");
 		var likeclass=$(this).children("a").children("em").attr("class");

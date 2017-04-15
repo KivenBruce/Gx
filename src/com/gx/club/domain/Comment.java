@@ -8,10 +8,10 @@ public class Comment {
 	private int club_id;
 	private String content;
 	private Date comment_time;
-	private String user_image;
+	private String gimage;
 	private int like_count;
 	private String user_name;
-	private String user_title;
+	private String gtitle;
 	public int getId() {
 		return id;
 	}
@@ -52,13 +52,6 @@ public class Comment {
 		this.comment_time = comment_time;
 	}
 
-	public String getUser_image() {
-		return user_image;
-	}
-
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
-	}
 
 	public int getLike_count() {
 		return like_count;
@@ -76,13 +69,23 @@ public class Comment {
 		this.user_name = user_name;
 	}
 
-	public String getUser_title() {
-		return user_title;
+	public String getGimage() {
+		return gimage;
 	}
 
-	public void setUser_title(String user_title) {
-		this.user_title = user_title;
+	public void setGimage(String gimage) {
+		this.gimage = gimage;
 	}
+
+	public String getGtitle() {
+		return gtitle;
+	}
+
+	public void setGtitle(String gtitle) {
+		this.gtitle = gtitle;
+	}
+
+
 	
 	
 

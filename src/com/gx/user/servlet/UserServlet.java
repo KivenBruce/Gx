@@ -18,7 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 
+import com.gx.club.dao.ClubDao;
+import com.gx.club.dao.CommentDao;
+import com.gx.club.domain.Club;
 import com.gx.pager.PageBean;
 import com.gx.pager.PageConstants;
 import com.gx.school.domain.School;
@@ -40,6 +44,8 @@ public class UserServlet extends BaseServlet {
 	Logger log = Logger.getLogger(this.getClass());
 	private UserDao userDao = new UserDao();
 	private VisitDao visitDao = new VisitDao();
+	private ClubDao clubDao = new ClubDao();
+	private CommentDao commentDao = new CommentDao();
 
 	/**
 	 * 进入管理员修改编辑
@@ -156,8 +162,20 @@ public class UserServlet extends BaseServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("name");
 		User user = userDao.findByName(username);
+		PageBean<Club> pb = (PageBean<Club>) clubDao.findByUserId(user.getId());
+		int likecount = clubDao.findLikeCountById(user.getId());
+		int commentCount = commentDao.getCommentCount(user.getId());
+		List<Map<String, Object>> count = clubDao.findCount();
+		Map<Object, Object> clubFocusCount = new HashMap<>();
+		for (Map<String, Object> map : count) {
+			clubFocusCount.put(map.get("club_id"), map.get("count"));
+		}
+		request.setAttribute("likecount", likecount);// 用户点赞总数
+		request.setAttribute("commentCount", commentCount);// 用户评论总数
+		request.setAttribute("clubFocusCount", clubFocusCount);// 返回每个club的关注量,后台遍历Map
 		request.setAttribute("user", user);
 		request.setAttribute("gid", user.getId());
+		request.setAttribute("pb", pb);
 		return "f:/adminjsps/account.jsp";
 	}
 
@@ -211,60 +229,54 @@ public class UserServlet extends BaseServlet {
 	 * @throws SQLException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public String editAccount(HttpServletRequest request, HttpServletResponse response)
+	public void editAccount(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
-		String gid = request.getParameter("gid");
-		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
-		String username = request.getParameter("gusername");
-		User user1 = userDao.findById(gid);
 		HttpSession session = request.getSession();
-		if (user.getLevel() == 0) {
-			user.setLevel(3);
-		}
-		if (username != null) {
+		String gid = request.getParameter("gid");
+		String gimage = request.getParameter("gimage");
+		String gusername = request.getParameter("gusername");
+		String gmail = request.getParameter("gmail");
+		String gtel = request.getParameter("gtel");
+		String gtitle = request.getParameter("gtitle");
+		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
+		user.setLevel(3);// 普通用户等级
+		String info = "success";
+		JSONObject jo = new JSONObject();
+		User user1 = userDao.findById(gid);
+		if (user.getGpwd() == null) {// 进入更新用户信息操作
+			if (user.getGimage() == null || user.getGimage().equals("")) {// 未更换头像,使用原来的头像
+				user.setGimage(user1.getGimage());
+			}
 			if (user.getGusername().equals(user1.getGusername())) {// 未对用户名进行修改.不修改用户名也算是修改,也可以修改其他的
 				userDao.editUser(user, gid);
-				if (user.getGpwd() != null && user.getGpwd().length() > 0) {
-					String pwd = user.getGpwd();
-					MessageDigest md5 = MessageDigest.getInstance("MD5");
-					BASE64Encoder base64en = new BASE64Encoder();
-					String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
-					userDao.resetPass(user, passEncode);
-					session.setAttribute("pwd", pwd);
-					log.debug("修改用户密码成功!");
-				}
-				log.debug("修改用户成功!");
-				request.setAttribute("succflag", "1");
-				request.setAttribute("user", user);
-				request.setAttribute("gid", gid);
-				return "f:/adminjsps/account.jsp";
+				log.debug("修改用户信息成功!");
 			} else {// 已对用户名进行修改
-				if (userDao.exist(user).equals("noexist")) {
+				if (userDao.exist(user).equals("noexist")) {// 新用户名
 					userDao.editUser(user, gid);
-					if (user.getGpwd() != null && user.getGpwd().length() > 0) {
-						String pwd = user.getGpwd();
-						MessageDigest md5 = MessageDigest.getInstance("MD5");
-						BASE64Encoder base64en = new BASE64Encoder();
-						String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
-						userDao.resetPass(user, passEncode);
-						session.setAttribute("pwd", pwd);
-						log.debug("修改用户密码成功!");
-					}
-					log.debug("修改用户成功!");
-					request.setAttribute("succflag", "1");
-					request.setAttribute("user", user);
-					request.setAttribute("gid", gid);
-					return "f:/adminjsps/account.jsp";
-				} else {
-					request.setAttribute("msg", "isexist");
-					request.setAttribute("user", user);
-					return "f:/adminjsps/account.jsp";
+					log.debug("修改用户信息成功!");
+					session.setAttribute("name", user.getGusername());
+					info = "修改用户信息成功";
+				} else {// 用户名已存在
+					log.debug("该用户名已存在,修改用户信息失败!!!");
+					info = "保存失败,该用户名已存在!";
 				}
 			}
+		} else {// 进入更改密码操作
+			if (user.getGpwd() != null && user.getGpwd().length() > 0) {
+				String pwd = user.getGpwd();
+				MessageDigest md5 = MessageDigest.getInstance("MD5");
+				BASE64Encoder base64en = new BASE64Encoder();
+				String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
+				userDao.resetPass(user, passEncode);
+				session.setAttribute("pwd", pwd);
+				log.debug("修改用户密码成功!");
+				info = "修改用户密码成功";
+			}
 
-		} else {
-			return "f:/adminjsps/account.jsp";
 		}
+		jo.put("userimage", user.getGimage());
+		jo.put("info", info);
+		response.getWriter().write(jo.toString());
 	}
 
 	/**
@@ -294,7 +306,7 @@ public class UserServlet extends BaseServlet {
 	public void visitData(HttpServletRequest request, HttpServletResponse response) {
 		String dateFrom = request.getParameter("datefrom");
 		String dateTo = request.getParameter("dateto");
-		List<Visit> msgDaily = visitDao.selectMessageDaily(dateFrom, dateTo);//时间期内每天访问量
+		List<Visit> msgDaily = visitDao.selectMessageDaily(dateFrom, dateTo);// 时间期内每天访问量
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> categories = new ArrayList<String>();
 		List<Integer> msgDailyList = new ArrayList<Integer>();

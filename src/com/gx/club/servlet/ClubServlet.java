@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,12 +73,11 @@ public class ClubServlet extends BaseServlet {
 		session.setAttribute("userid", user.getId());
 		PageBean<Club> pb = (PageBean<Club>) clubDao.findAll(flag, parentid, user.getId(), question);
 		PageBean<Club> hotpb = (PageBean<Club>) clubDao.findHot();// 查询热点club
-		List<Map<String, Object>> count = clubDao.findCount(flag, parentid, user.getId());
+		List<Map<String, Object>> count = clubDao.findCount();// 查询每个club的关注数量
 		Map<Object, Object> mapcount = new HashMap<>();
-		for (Map<String, Object> map : count) {// 查询每个club的关注数量
+		for (Map<String, Object> map : count) {
 			mapcount.put(map.get("club_id"), map.get("count"));
 		}
-
 		List<Object[]> focusidList = clubDao.searchFocus(user.getId());
 		String flist = new String();// 查询是否已关注club_id.其实不用这样做,jsp遍历focusidList就行.
 		for (Object[] objects : focusidList) {
@@ -184,7 +184,7 @@ public class ClubServlet extends BaseServlet {
 			throws SQLException, ServletException, IOException {
 		String commentid = request.getParameter("commentid");
 		commentDao.deleteComment(commentid);
-		JSONObject jo=new JSONObject();
+		JSONObject jo = new JSONObject();
 		jo.put("result", "delete success");
 		response.getWriter().write(jo.toString());
 	}
@@ -211,12 +211,11 @@ public class ClubServlet extends BaseServlet {
 		response.getWriter().write(jo.toString());
 	}
 
-
 	public String addComment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		Comment comment = CommonUtils.toBean(request.getParameterMap(), Comment.class);
 		if (comment.getContent() != null) {
-			commentDao.addCommentList(comment);
+			commentDao.addComment(comment);
 		}
 
 		return clubDetail(request, response);
