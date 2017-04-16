@@ -51,7 +51,7 @@ public class OutschoolServlet extends BaseServlet {
 			}
 			school.setGcontent(school.getGcontent().trim());
 			this.ns.editSchool(school, gid);
-			log.debug("修改校外推荐活动成功!");
+			log.debug("修改校外活动成功!");
 			return findAll(request, response);
 		} else {
 			request.setAttribute("msg", "修改页面");
