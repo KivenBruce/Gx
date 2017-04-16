@@ -22,6 +22,11 @@
 <script src="../adminjsps/My97DatePicker/WdatePicker.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/judge.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../uedit/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../uedit/ueditor.all.min.js"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/site.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -38,78 +43,6 @@
 	margin: 0 35px 15px 0;
 }
 </style>
-<script language="javascript">
-	function judge() {
-		if ($.trim($("#gtheme").val()) == "") {
-			document.getElementById("egtheme").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动主题！</span>";
-			return false;
-		} else {
-			document.getElementById("egtheme").innerHTML = "";
-		}
-
-		if ($.trim($("#gpart").val()) == "") {
-			document.getElementById("egpart").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动内容！</span>";
-			return false;
-		} else {
-			document.getElementById("egpart").innerHTML = "";
-		}
-
-		if ($.trim($("#gtime").val()) == "") {
-			document.getElementById("egtime").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写举办时间！</span>";
-			return false;
-		} else {
-			document.getElementById("egtime").innerHTML = "";
-		}
-
-		if ($.trim($("#gplace").val()) == "") {
-			document.getElementById("egplace").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动地点！</span>";
-			return false;
-		} else {
-			document.getElementById("egplace").innerHTML = "";
-		}
-
-		if ($.trim($("#gusername").val()) == "") {
-			document.getElementById("egusername").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写主持人！</span>";
-			return false;
-		} else {
-			document.getElementById("egusername").innerHTML = "";
-		}
-
-		if ($.trim($("#gperson").val()) == "") {
-			document.getElementById("egperson").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动人数！</span>";
-			return false;
-		} else {
-			document.getElementById("egperson").innerHTML = "";
-		}
-		if ($.trim($("#gtupian").val()) == "") {
-			document.getElementById("egtupian").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动图片！！</span>";
-			return false;
-		} else {
-			document.getElementById("egtupian").innerHTML = "";
-		}
-
-		if ($.trim($("#gremain").val()) == "") {
-			document.getElementById("egremain").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动类型！</span>";
-			return false;
-		} else {
-			document.getElementById("egremain").innerHTML = "";
-		}
-
-		if ($.trim($("#gprice").val()) == "") {
-			document.getElementById("egprice").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写门票价格！</span>";
-			return false;
-		} else {
-			document.getElementById("egprice").innerHTML = "";
-		}
-		if ($.trim($("#gcontent").val()) == "") {
-			document.getElementById("egcontent").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写活动详细！</span>";
-			return false;
-		} else {
-			document.getElementById("egcontent").innerHTML = "";
-		}
-	}
-</script>
-
 </head>
 <body>
 	<c:if test="${sessionScope.level==1}">
@@ -151,47 +84,43 @@
 							<div class="divv">
 								<span> 活动主题: <input type="text" id="gtheme" name="gtheme"
 									value="${school.gtheme }" />
-								</span> <span id="egtheme"></span> <span> 举办单位: <input
-									type="text" id="gpart" name="gpart" value="${school.gpart }" />
-								</span> <span id="egpart"></span>
-							</div>
-							<div class="divv">
-								<span> 举办时间 :<input type="text" id="gtime" name="gtime"
+								</span><span> 举办单位: <input type="text" id="gpart" name="gpart"
+									value="${school.gpart }" />
+								</span> <span> 举办时间 :<input type="text" id="gtime" name="gtime"
 									value="${school.gtime }"
 									onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })"
 									autocomplete="off" />
 
-								</span> <span id="egtime"></span> <span> 举办地点 :<input
-									type="text" id="gplace" name="gplace" value="${school.gplace }" />
-								</span> <span id="egplace"></span>
+								</span>
 							</div>
 							<div class="divv">
-								<span> 举 &nbsp办 &nbsp者 :<input type="text" id="gusername"
-									name="gusername" value="${school.gusername }" /> <span
-									id="egusername"></span>
+								<span> 举办地点 :<input type="text" id="gplace" name="gplace"
+									value="${school.gplace }" />
+								</span> <span> 举 &nbsp办 &nbsp者 :<input type="text"
+									id="gusername" name="gusername" value="${school.gusername }" />
 								</span> <span> 所需人数: <input type="text" id="gperson"
-									name="gperson" value="${school.gperson }" /> <span
-									id="egperson"></span>
+									name="gperson" value="${school.gperson }" />
 								</span>
 							</div>
 							<div class="divv">
 								<span> 图片:<input type="file" id="gtupian" name="gtupian"
 									value="${school.gtupian}" />
-								</span> <span id="egtupian"></span> <span style="margin-left: 35px">
-									活动类型 :<input type="text" id="gremain" name="gremain"
-									value="${school.gremain }" /> <span id="egremain"></span>
+								</span> <span style="margin-left: 35px"> 活动类型 :<input
+									type="text" id="gremain" name="gremain"
+									value="${school.gremain }" />
+								</span> <span> 门票|每人 :<input type="text" id="gprice"
+									name="gprice" value="${school.gprice }" />
 								</span>
 							</div>
 							<div class="divv">
-								<span> 门票|每人 :<input type="text" id="gprice"
-									name="gprice" value="${school.gprice }" /> <span id="egprice"></span>
-								</span> <span>举办内容:<textarea id="gcontent" name="gcontent">								
-									</textarea>
-								</span> <span id="egcontent"></span> <input id="inpp" type="hidden"
-									value="${school.gcontent }" />
-
+								<span>举办内容:<span id="errorinfo" style='padding-left:22px;color:#FF0033'></span>
+									<div style="width: 680px; margin-top: 15px">
+										<script id="editor" type="text/plain">${school.gcontent}</script>
+									</div>
+								</span> <span id="egcontent"></span>
 							</div>
-							<div class="form-actions">
+							<div
+								style="float: right; margin-right: 190px; margin-top: -80px;">
 								<input type="submit" class="btn btn-success btn-large"
 									value="Save Changes" id="tj" /> <a class="btn"
 									href="<%=path%><%=cancel%>">Cancel</a>
@@ -208,5 +137,9 @@
 	<c:if test="${sessionScope.level!=1}">
 		<h1 style="text-align: center">你没有权限访问此页面</h1>
 	</c:if>
+	<script type="text/javascript">
+		UEDITOR_CONFIG.UEDITOR_HOME_URL = '../uedit/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息 
+		var editor = UE.getEditor('editor');
+	</script>
 </body>
 </html>

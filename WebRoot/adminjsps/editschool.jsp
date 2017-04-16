@@ -26,12 +26,11 @@
 <script src="js/jquery.js"></script>
 <script src="js/judge.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		document.getElementById('gcontent').value = document
-				.getElementById('inpp').value;
-	});
-</script>
+<script type="text/javascript" charset="utf-8"
+	src="../uedit/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../uedit/ueditor.all.min.js"></script>
+
 <style type="text/css">
 .divv {
 	font-size: 20px;
@@ -76,66 +75,64 @@
 							<div class="divv">
 								<span> 活动主题: <input type="text" id="gtheme" name="gtheme"
 									value="${school.gtheme }" />
-								</span><span id="egtheme"></span> <span> 举办单位: <input
-									type="text" id="gpart" name="gpart" value="${school.gpart }" />
-								</span><span id="egpart"></span>
-							</div>
-							<div class="divv">
-								<span> 举办时间 :<input type="text" id="gtime" name="gtime"
+								</span><span> 举办单位: <input type="text" id="gpart" name="gpart"
+									value="${school.gpart }" />
+								</span> <span> 举办时间 :<input type="text" id="gtime" name="gtime"
 									value="${school.gtime }"
 									onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })"
 									autocomplete="off" />
-
-								</span><span id="egtime"></span> <span> 举办地点 :<input type="text"
-									id="gplace" name="gplace" value="${school.gplace }" />
-
-								</span><span id="egplace"></span>
+								</span>
 							</div>
 							<div class="divv">
-								<span> 举 &nbsp办 &nbsp者 :<input type="text" id="gusername"
+								<span> 举办地点 :<input type="text" id="gplace" name="gplace"
+									value="${school.gplace }" />
+
+								</span><span> 举 &nbsp办 &nbsp者 :<input type="text" id="gusername"
 									name="gusername" value="${school.gusername }" />
 
-								</span><span id="egusername"></span> <span> 所需人数: <input
-									type="text" id="gperson" name="gperson"
-									value="${school.gperson }" />
+								</span> <span> 所需人数: <input type="text" id="gperson"
+									name="gperson" value="${school.gperson }" />
 
-								</span><span id="egperson"></span>
+								</span>
 							</div>
 							<div class="divv">
 								<span> 图片:<input type="file" id="tupian" name="tupian" />
 									<input id="gtupian" name="gtupian" type="hidden"
 									value="${school.gtupian }" />
-								</span><span id="egtupian"></span> <span style="margin-left: 35px">
+								</span><span id="egtupian"></span> <span>
 									活动类型 :<input type="text" id="gremain" name="gremain"
 									value="${school.gremain }" />
 
-								</span><span id="egremain"></span>
-							</div>
-							<div class="divv">
-								<span> 门票|每人 :<input type="text" id="gprice"
+								</span><span> 门票|每人 :<input type="text" id="gprice"
 									name="gprice" value="${school.gprice }" />
 
-								</span><span id="egprice"></span> <span>举办内容:<textarea
-										id="gcontent" name="gcontent">								
-									</textarea>
-								</span><span id="egcontent"></span> <input id="inpp" type="hidden"
-									value="${school.gcontent }" />
-
+								</span>
 							</div>
-							<c:if test="${fn:length(type)<9 }">
-								<div class="form-actions">
-									<input type="submit" class="btn btn-success btn-large"
-										value="Save Changes" /> <a class="btn"
-										href="http://localhost:8080/Gx/InschoolServlet?method=findAll">Cancel</a>
-								</div>
-							</c:if>
-							<c:if test="${fn:length(type)>8 }">
-								<div class="form-actions">
-									<input type="submit" class="btn btn-success btn-large"
-										value="Save Changes" /> <a class="btn"
-										href="http://localhost:8080/Gx/OutschoolServlet?method=findAll">Cancel</a>
-								</div>
-							</c:if>
+							<div class="divv">
+								<span>举办内容:<span id="errorinfo" style='padding-left:22px;color:#FF0033'></span>
+									<div style="width: 680px; margin-top: 15px">
+										<script id="editor" type="text/plain">${school.gcontent}</script>
+									</div>
+								</span> <input id="gcontent" name="gcontent" type="hidden" />
+								<c:if test="${fn:length(type)<9 }">
+									<div
+										style="float: right; margin-right: 190px; margin-top: -50px;">
+										<input type="submit" class="btn btn-success btn-large"
+											value="Save Changes" /> <a class="btn"
+											href="http://localhost:8080/Gx/InschoolServlet?method=findAll">Cancel</a>
+									</div>
+								</c:if>
+								<c:if test="${fn:length(type)>8 }">
+									<div
+										style="float: right; margin-right: 190px; margin-top: -50px;">
+										<input type="submit" class="btn btn-success btn-large"
+											value="Save Changes" /> <a class="btn"
+											href="http://localhost:8080/Gx/OutschoolServlet?method=findAll">Cancel</a>
+									</div>
+								</c:if>
+							</div>
+
+
 						</fieldset>
 					</form>
 				</div>
@@ -147,6 +144,9 @@
 		<%@include file="/adminjsps/foot.jsp"%>
 
 	</div>
-
+	<script type="text/javascript">
+		UEDITOR_CONFIG.UEDITOR_HOME_URL = '../uedit/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息 
+		var editor = UE.getEditor('editor');
+	</script>
 </body>
 </html>
