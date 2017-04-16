@@ -70,10 +70,12 @@ public class NavServlet extends BaseServlet {
 		String gid = request.getParameter("gid");
 		String type = request.getParameter("type");
 		int radio = Integer.parseInt(request.getParameter("aa"));
-		String url = request.getParameter("gurl");
+
 		Navigate navigate = (Navigate) CommonUtils.toBean(request.getParameterMap(), Navigate.class);
-		if (url == null) {
+		if(navigate.getGurl()==null){
 			navigate.setGurl("0");
+		}else{
+			navigate.setGurl("http://"+navigate.getGurl());
 		}
 		String tupian = request.getParameter("tupian");
 		String gtupian = request.getParameter("gtupian");
