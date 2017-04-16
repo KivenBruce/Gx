@@ -38,8 +38,7 @@
 							netus et malesuada fames ac turpis egestas.</p>
 						<p>
 							<a class="btn btn-success btn-large"
-								href="<c:url value='/UserServlet?method=findAll'/>">Manage
-								Users &raquo;</a>
+								href="adduser.jsp">添加用户 &raquo;</a>
 						</p>
 					</div>
 					<div>

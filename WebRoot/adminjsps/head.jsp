@@ -45,13 +45,17 @@
 				BISTU后台管理系统</h1>
 			<div class="user">
 				你好, <span class="online-total"><%=session.getAttribute("name")%></span>&nbsp&nbsp&nbsp&nbsp
-				<span><%=s%></span>
+				<span><%=s%></span> <span class="top-menu" style="margin-left: 100px"><a
+					class="link" href="<c:url value='/Main.do'/>"> <i class="fa fa-anchor"></i> 普通模式
+				</a></span>
 			</div>
 			<div class="top-menu"
 				style="position: absolute; top: 25px; right: 10px; color: white; font-size: 15px;">
 				<a class="link" href="index1.jsp"> <i class="fa fa-home"></i> 首页
-				</a> | <a class="link" href="stats.jsp"> <i class="fa fa-book"></i> 帮助
-				</a> | <a class="link"href="reset.jsp"> <i class="fa fa-gear"></i> 修改密码
+				</a> | <a class="link" href="stats.jsp"> <i class="fa fa-book"></i>
+					帮助
+				</a> | <a class="link" href="reset.jsp"> <i class="fa fa-gear"></i>
+					修改密码
 				</a> | <a class="link" href="../Logout.do"> <i
 					class="fa fa-sign-out"></i> 注销
 				</a>

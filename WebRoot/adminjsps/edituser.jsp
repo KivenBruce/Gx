@@ -23,7 +23,8 @@
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="../js/validation-user.js"></script><!-- 自定义js,判断是否合法输入 -->
+<script src="../js/validation-user.js"></script>
+<!-- 自定义js,判断是否合法输入 -->
 <style type="text/css">
 .error {
 	border: none;
@@ -31,24 +32,36 @@
 	color: #C03;
 	font-size: 12px;
 }
+
+
+.divv {
+	 font-size: 20px;
+    padding-top: 15px;
+}
+
+.divv input {
+	color: #997777;
+	font-size: 18px;
+	margin-left: 10px;
+	width: 250px;
+}
 </style>
 
 <script language="javascript">
-	$(function() {
-		if ($("#msg").val() == "isexist") {
-			document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **该用户名已存在！</span>";
-		}
-	});
-	function judge() {
-		var q = document.getElementById("gusername").value;
-		if (q == "") {
-			document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写用户名！</span>";
-			return false;
-
-		} else {
-			document.getElementById("egname").innerHTML = "";
-		}
+function judge() {
+	var u = document.getElementById("gusername").value;
+	if (u == "") {
+		document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写用户名！</span>";
+		$("#egname").show().delay(2000).hide(0);
+		return false;
 	}
+	var t = document.getElementById("gtitle").value;
+	if (t == "") {
+		document.getElementById("etitle").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写个性签名！</span>";
+		$("#etitle").show().delay(3000).hide(0);
+		return false;
+	}
+}
 </script>
 </head>
 <body>
@@ -57,7 +70,6 @@
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<%@include file="/adminjsps/left.jsp"%>
-
 				<div class="span9">
 					<div class="row-fluid">
 						<div class="page-header">
@@ -68,56 +80,55 @@
 						<form onsubmit="return judge()"
 							action="<c:url value='/UserServlet?method=editUser&gid=${gid}'/>"
 							method="post">
-							<fieldset>
-								<input id="msg" type="hidden" value="${msg}" />
-								<div class="control-group">
-									<label class="control-label">用户名</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="gusername"
-											maxlength="10" name="gusername" value="${user.gusername }" /><span
-											id="egname"></span>
-
-									</div>
+							<div id="userinfo">
+								<div class="divv">
+									<span> 用户名 :<input type="text" id="gusername"
+										name="gusername" value="${user.gusername }" />
+									</span> <span id="egname"></span>
 								</div>
-								<div class="control-group">
-									<label class="control-label">邮 箱</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="gmail"
-											name="gmail" value="${user.gmail }" /><span id="egemail"></span>
-										<span id='email_error' class='error'>邮箱格式不正确!</span>
-									</div>
+								<div class="divv">
+									<span> 邮&nbsp&nbsp&nbsp&nbsp&nbsp箱:<input type="text"
+										id="gmail" name="gmail" value="${user.gmail }" />
+									</span> <span id='email_error' class='error'>**邮箱格式不正确!</span>
 								</div>
-								<div class="control-group">
-									<label class="control-label">手机号码</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="gtel" name="gtel"
-											value="${user.gtel }" /><span id="egphone"></span> <span
-											id='tel_error' class='error'>电话号码格式不正确!</span>
-									</div>
+								<div class="divv">
+									<span> 手&nbsp&nbsp&nbsp&nbsp&nbsp机:<input type="text"
+										id="gtel" name="gtel" value="${user.gtel }" />
+									</span><span id='tel_error' class='error'>**电话号码格式不正确!</span>
 								</div>
-								<div class="control-group">
-									<label class="control-label">级 别</label>
-									<div class="controls">
-										<select id="level" name="level">
-											<option value="1">管理员</option>
-											<option value="2">高级会员</option>
-											<option value="3" selected>普通会员</option>
-										</select>
-									</div>
+								<div class="divv">
+									<span> 头&nbsp&nbsp&nbsp&nbsp&nbsp像:<input type="file"
+										id="gimage" name="gimage" value="${user.gimage }" />
+									</span>
+									<span style="margin-left:-70px"> 默认:${user.gimage }
+									</span><input type="hidden" id="defaultimg" name="defaultimg" value="${user.gimage }" />
+								</div>
+								<div class="divv">
+									<span> 签&nbsp&nbsp&nbsp&nbsp&nbsp名:<input type="text" maxlength="13"
+										id="gtitle" name="gtitle" value="${user.gtitle }" />
+									</span> <span id="etitle"></span>
+								</div>
+								<div class="divv">
+									<span>级 &nbsp&nbsp&nbsp&nbsp&nbsp别:										
+											<select id="level" name="level" style="width: 250px;">
+												<option value="1">管理员</option>
+												<option value="2">高级会员</option>
+												<option value="3" selected>普通会员</option>
+											</select>										
+									</span>
 								</div>
 								<div class="form-actions">
 									<input type="submit" class="btn btn-success btn-large"
 										id="send_message" value="Save User" /> <a class="btn"
 										href="http://localhost:8080/Gx/UserServlet?method=findAll">Cancel</a>
 								</div>
-							</fieldset>
+							</div>
+
 						</form>
 					</div>
 				</div>
 			</div>
-
 			<hr>
-
 			<%@include file="/adminjsps/foot.jsp"%>
 
 		</div>

@@ -193,6 +193,10 @@ public class UserServlet extends BaseServlet {
 			throws ServletException, IOException, SQLException {
 		String gid = request.getParameter("gid");
 		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
+		String defaultimg=request.getParameter("defaultimg");
+		if(user.getGimage()==null||user.getGimage().equals("")){
+			user.setGimage(defaultimg);
+		}
 		String username = request.getParameter("gusername");
 		User user1 = userDao.findById(gid);
 		if (username != null) {
@@ -239,7 +243,9 @@ public class UserServlet extends BaseServlet {
 		String gtel = request.getParameter("gtel");
 		String gtitle = request.getParameter("gtitle");
 		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
-		user.setLevel(3);// 普通用户等级
+		String sessionlevel=session.getAttribute("level").toString();
+		int level=Integer.parseInt(sessionlevel);
+		user.setLevel(level);// 普通用户等级
 		String info = "success";
 		JSONObject jo = new JSONObject();
 		User user1 = userDao.findById(gid);
@@ -267,7 +273,7 @@ public class UserServlet extends BaseServlet {
 				MessageDigest md5 = MessageDigest.getInstance("MD5");
 				BASE64Encoder base64en = new BASE64Encoder();
 				String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
-				userDao.resetPass(user, passEncode);
+				userDao.resetPass(gid, passEncode);
 				session.setAttribute("pwd", pwd);
 				log.debug("修改用户密码成功!");
 				info = "修改用户密码成功";
@@ -359,7 +365,7 @@ public class UserServlet extends BaseServlet {
 			MessageDigest md5 = MessageDigest.getInstance("MD5");
 			BASE64Encoder base64en = new BASE64Encoder();
 			String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
-			userDao.resetPass(user, passEncode);
+			userDao.resetPass(gid, passEncode);
 			session.setAttribute("pwd", pwd);
 			log.debug("修改用户密码成功!");
 		} else {

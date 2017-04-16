@@ -24,7 +24,7 @@ $(function() {
 		
 		if ($.trim($(this).text()) == "关注") {
 			$(this).text('取消关注');
-			val = 0;
+			val = 0;//原来未关注
 		} else {
 			$(this).text('关注');
 			val = 1;

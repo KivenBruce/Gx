@@ -147,10 +147,10 @@ public class UserDao {
 
 	}
 
-	public void resetPass(User user, String passEncode) {
-		String sql = "update guser set Gpwd=? where gid=?";
+	public void resetPass(String gid, String passEncode) {
+		String sql = "update guser set Gpwd=? where id=?";
 		try {
-			this.qr.update(sql, new Object[] { passEncode, user.getId() });
+			this.qr.update(sql, passEncode,gid);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

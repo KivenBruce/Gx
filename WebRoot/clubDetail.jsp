@@ -159,7 +159,7 @@
 						<span class="notice-btn ui-notice" style="cursor: pointer;">取消关注</span>
 					</c:if>
 					<input id="isfo" type="hidden" value="${club.isfocus}" /> <input
-						id="isfo" type="hidden" value="${club.user_id}" /> <input
+						id="isfo" type="hidden" value="${userid}" /> <input
 						id="isfo" type="hidden" value="${club.club_id }" />
 				</h4>
 				<p>
