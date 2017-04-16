@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta charset="utf-8">
-<title>New User | Strass</title>
+<title>Cubic-用户编辑</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description"
 	content="Admin panel developed with the Bootstrap from Twitter.">
@@ -47,22 +47,6 @@
 }
 </style>
 
-<script language="javascript">
-function judge() {
-	var u = document.getElementById("gusername").value;
-	if (u == "") {
-		document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写用户名！</span>";
-		$("#egname").show().delay(2000).hide(0);
-		return false;
-	}
-	var t = document.getElementById("gtitle").value;
-	if (t == "") {
-		document.getElementById("etitle").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写个性签名！</span>";
-		$("#etitle").show().delay(3000).hide(0);
-		return false;
-	}
-}
-</script>
 </head>
 <body>
 	<c:if test="${sessionScope.level==1}">

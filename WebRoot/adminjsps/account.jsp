@@ -17,35 +17,6 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/validation-user.js"></script>
 <script type="text/javascript">
-	$(function() {
-		for (var i = 1; i <= 3; i++) {
-			(function(arg) {
-				$("#i" + i).click(function(i) {
-					$(".content-menu li").attr("class", "menu menu-item");
-					$(this).attr("class", "menu menu-item active");
-					$(".ui-user-item").hide();
-					$("#q" + arg).show();
-				});
-			})(i);
-
-		}
-	});
-</script>
-<script type="text/javascript">
-	function judge() {
-		var u = document.getElementById("gusername").value;
-		if (u == "") {
-			document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写用户名！</span>";
-			$("#egname").show().delay(2000).hide(0);
-			return false;
-		}
-		var t = document.getElementById("gtitle").value;
-		if (t == "") {
-			document.getElementById("etitle").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写个性签名！</span>";
-			$("#etitle").show().delay(3000).hide(0);
-			return false;
-		}
-	}
 	function judgePass() {
 		var w = document.getElementById("gpwd").value;
 		if (w == "") {
@@ -124,6 +95,17 @@
 	color: #FF0033;
 	display: none;
 }
+
+.notice {
+	cursor: pointer;
+	background-color: #ff634f;
+	line-height: 18px;
+	text-align: center;
+	color: #fff;
+	width: 60px;
+	position: absolute;
+	margin-left: 10px;
+}
 }
 </style>
 </head>
@@ -200,7 +182,7 @@
 
 				<ul class="sns-menu-list">
 					<li class="menu menu-item" data-hash="friends">我的关注
-						${fn:length(pb.beanList)}</li>
+						<span id="focuscount" >${fn:length(pb.beanList)}</span></li>
 					<li class="menu menu-item" data-hash="follow">我的点赞
 						${likecount}</li>
 					<li class="menu menu-item last" data-hash="follower">我的评论
@@ -229,7 +211,10 @@
 									<dt>
 										<a
 											href="/Gx/ClubServlet?method=clubDetail&clubid=${item.club_id}"
-											target="_blank">${item.club_name}</a>
+											target="_blank">${item.club_name}</a> 
+											<span class="notice" style="line-height: 18px">取消关注</span>
+											<input  type="hidden" value="${gid}" />
+											<input  type="hidden" value="${item.club_id}" />
 									</dt>
 									<dd>
 										<c:forEach var="keys" items="${clubFocusCount}">
@@ -281,8 +266,8 @@
 					<div class="form-actions"
 						style="margin-left: 10px; margin-top: 20px; padding-bottom: 10px;">
 						<input type="submit" class="btn btn-success btn-large"
-							id="send_message" value="保存修改" id="tj" /> <input id="gid" type="hidden"
-							value="${gid}">
+							id="send_message" value="保存修改" id="tj" /> <input id="gid"
+							type="hidden" value="${gid}">
 						<!-- <button onclick="window.history.back()"
 							style="border: 1px solid #31c37c; border-radius: 8px; color: #ed008c; font-size: 13px; height: 30px; width: 40px;">取
 							消</button> -->
@@ -304,8 +289,8 @@
 							</span> <span id="egnewid"></span>
 						</div>
 						<div class="divv">
-							<span> 确认密码: <input type="password" id="gnewids" style="margin-left: 7px"
-								name="gnewids" />
+							<span> 确认密码: <input type="password" id="gnewids"
+								style="margin-left: 7px" name="gnewids" />
 							</span> <span id="egnewids"></span>
 						</div>
 						<div class="form-actions"
