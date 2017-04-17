@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="css/animate.css" type="text/css">
 <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="shortcut icon" type="image/x-icon"
+	href="http://localhost:8080/Gx/logo.ico" />
 <!-- color scheme -->
 <link rel="stylesheet" href="css/color.css" type="text/css">
 <!-- custom style css -->
