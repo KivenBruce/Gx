@@ -6,7 +6,7 @@
 	<display-name></display-name>
 	<servlet>
 		<servlet-name>LoginS.do</servlet-name>
-		<servlet-class>com.gx.web.controller.LoginServlet</servlet-class>
+		<servlet-class>com.gx.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginS.do</servlet-name>
@@ -15,7 +15,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RegisterS</servlet-name>
-		<servlet-class>com.gx.web.controller.RegisterServlet</servlet-class>
+		<servlet-class>com.gx.servlet.RegisterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegisterS</servlet-name>
@@ -23,7 +23,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Logout.do</servlet-name>
-		<servlet-class>com.gx.web.controller.LogoutServlet</servlet-class>
+		<servlet-class>com.gx.servlet.LogoutServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Logout.do</servlet-name>
@@ -90,7 +90,7 @@
 	</filter-mapping>
 	<filter><!-- 防止未经登录执行相关操作 -->
 		<filter-name>onlineFilter</filter-name>
-		<filter-class>com.gx.web.filter.OnlineFilter</filter-class>
+		<filter-class>com.gx.filter.OnlineFilter</filter-class>
 		<init-param>
 			<param-name>excludedPages</param-name>
 			<param-value>/index.jsp,/login.jsp,/image.jsp,/register.jsp,/LoginS.do,/Index,/Register,/RegisterS</param-value>
@@ -104,7 +104,7 @@
 	</filter-mapping>
 	<filter><!-- 防止注销以后后退 -->
 		<filter-name>noCacheFilter</filter-name>
-		<filter-class>com.gx.web.filter.NoCacheFilter</filter-class>
+		<filter-class>com.gx.filter.NoCacheFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>noCacheFilter</filter-name>
@@ -112,48 +112,24 @@
 	</filter-mapping>
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>
-		<servlet-class>com.gx.user.servlet.UserServlet</servlet-class>
+		<servlet-class>com.gx.servlet.UserServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>OutschoolServlet</servlet-name>
-		<servlet-class>com.gx.school.servlet.OutschoolServlet</servlet-class>
+		<servlet-name>SchoolServlet</servlet-name>
+		<servlet-class>com.gx.servlet.SchoolServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>OutschoolServlet</servlet-name>
-		<url-pattern>/OutschoolServlet</url-pattern>
+		<servlet-name>SchoolServlet</servlet-name>
+		<url-pattern>/SchoolServlet</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>InschoolServlet</servlet-name>
-		<servlet-class>com.gx.school.servlet.InschoolServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>InschoolServlet</servlet-name>
-		<url-pattern>/InschoolServlet</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>OutServlet</servlet-name>
-		<servlet-class>com.gx.tui.servlet.OutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>OutServlet</servlet-name>
-		<url-pattern>/OutServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>InServlet</servlet-name>
-		<servlet-class>com.gx.tui.servlet.InServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>InServlet</servlet-name>
-		<url-pattern>/InServlet</url-pattern>
-	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>FrontServlet</servlet-name>
-		<servlet-class>com.gx.front.servlet.FrontServlet</servlet-class>
+		<servlet-class>com.gx.servlet.FrontServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FrontServlet</servlet-name>
@@ -162,7 +138,7 @@
 
 	<servlet>
 		<servlet-name>NavServlet</servlet-name>
-		<servlet-class>com.gx.navlist.servlet.NavServlet</servlet-class>
+		<servlet-class>com.gx.servlet.NavServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>NavServlet</servlet-name>
@@ -170,7 +146,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ClubServlet</servlet-name>
-		<servlet-class>com.gx.club.servlet.ClubServlet</servlet-class>
+		<servlet-class>com.gx.servlet.ClubServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ClubServlet</servlet-name>
@@ -179,7 +155,7 @@
 
 	<servlet>
 		<servlet-name>CommentServlet</servlet-name>
-		<servlet-class>com.gx.club.servlet.CommentServlet</servlet-class>
+		<servlet-class>com.gx.servlet.CommentServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CommentServlet</servlet-name>

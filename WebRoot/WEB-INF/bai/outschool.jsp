@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Cubic - One Page Responsive HTML 5 Website Template</title>
+<title>Cubic - 校外活动</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Responsive Minimal Bootstrap Theme">
 <meta name="keywords"
@@ -112,10 +112,9 @@
 								</a>
 							</h1>
 							<span id="menu-btn"></span> <span id="newinput"><input
-								id="q" name="q" autocomplete="off"
-								value="" maxlength="280px" placeholder="搜索你感兴趣的内容..."
-								type="text" /></span> <span><input id="searchimg" type="image"
-								src="/Gx/adminjsps/img/search1.png"
+								id="q" name="q" autocomplete="off" value="" maxlength="280px"
+								placeholder="搜索你感兴趣的内容..." type="text" /></span> <span><input
+								id="searchimg" type="image" src="/Gx/adminjsps/img/search1.png"
 								style="width: 40px; vertical-align: middle; margin-left: -4px; border-radius: 4px"
 								onclick="search()" /></span>
 
@@ -182,7 +181,9 @@
 								<a href="${Gurl[0]}" class="btn-slider" target="_blank">查看 </a>
 							</c:if>
 							<c:if test="${Gurl[0]=='0'}">
-								<a href="#" class="btn-slider">查看 </a>
+								<a
+									href="FrontServlet?method=navDetail&gid=<%=navschool[0].getId()%>&type=nav"
+									target="_blank" class="btn-slider">查看 </a>
 							</c:if>
 
 						</div></li>
@@ -214,7 +215,9 @@
 								<a href="${Gurl[1]}" class="btn-slider" target="_blank">查看 </a>
 							</c:if>
 							<c:if test="${Gurl[1]=='0'}">
-								<a href="#" class="btn-slider">查看 </a>
+								<a
+									href="FrontServlet?method=navDetail&gid=<%=navschool[1].getId()%>&type=nav"
+									target="_blank" class="btn-slider">查看 </a>
 							</c:if>
 						</div></li>
 					<!-- 第3张图片 -->
@@ -245,7 +248,9 @@
 								<a href="${Gurl[2]}" class="btn-slider" target="_blank">查看 </a>
 							</c:if>
 							<c:if test="${Gurl[2]=='0'}">
-								<a href="#" class="btn-slider">查看 </a>
+								<a
+									href="FrontServlet?method=navDetail&gid=<%=navschool[2].getId()%>&type=nav"
+									target="_blank" class="btn-slider">查看 </a>
 							</c:if>
 						</div></li>
 					<!-- 第4张图片 -->
@@ -276,7 +281,9 @@
 								<a href="${Gurl[3]}" class="btn-slider" target="_blank">查看 </a>
 							</c:if>
 							<c:if test="${Gurl[3]=='0'}">
-								<a href="#" class="btn-slider">查看 </a>
+								<a
+									href="FrontServlet?method=navDetail&gid=<%=navschool[3].getId()%>&type=nav"
+									target="_blank" class="btn-slider">查看 </a>
 							</c:if>
 						</div></li>
 				</ul>
@@ -298,7 +305,7 @@
 							<div class="spacer-single"></div>
 						</div>
 						<span style="float: right; font-size: 15px; margin-right: 15px"><a
-							href="FrontServlet?method=moreActive&type=outschool">更多最新</a></span>
+							href="FrontServlet?method=moreActive&type=out" target="_blank">更多最新</a></span>
 					</div>
 					<br> <br>
 					<div class="row">
@@ -414,7 +421,7 @@
 							<div class="spacer-single"></div>
 						</div>
 						<span style="float: right; font-size: 15px; margin-right: 15px"><a
-							href="FrontServlet?method=moreActive&type=outtuijian">更多推荐</a></span>
+							href="FrontServlet?method=moreActive&type=outtui" target="_blank">更多推荐</a></span>
 					</div>
 					<div class="row">
 						<!-- team member -->

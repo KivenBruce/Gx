@@ -9,16 +9,16 @@
 				href="<c:url value='/UserServlet?method=findAll'/>">用户管理</a></li>
 
 			<li class="nav-header"><i class="fa fa-group"></i> 校外活动</li>
-			<li><a href="<c:url value='/OutschoolServlet?method=findAll'/>">管理活动</a></li>
-			<li><a href="addschool.jsp?type=Out">添加活动</a></li>
+			<li><a href="<c:url value='/SchoolServlet?method=findAll&type=1'/>">管理活动</a></li>
+			<li><a href="addschool.jsp?type=1">添加活动</a></li>
 
 			<li class="nav-header"><i class="fa fa-graduation-cap"></i> 校内活动</li>
-			<li><a href="<c:url value='/InschoolServlet?method=findAll'/>">管理活动</a></li>
-			<li><a href="addschool.jsp?type=In">添加活动</a></li>
+			<li><a href="<c:url value='/SchoolServlet?method=findAll&type=0'/>">管理活动</a></li>
+			<li><a href="addschool.jsp?type=0">添加活动</a></li>
 
 			<li class="nav-header"><i class="icon-bell"></i> 热门推荐</li>
-			<li><a href="<c:url value='/InServlet?method=findAll'/>">校内推荐</a></li>
-			<li><a href="<c:url value='/OutServlet?method=findAll'/>">校外推荐</a></li>
+			<li><a href="<c:url value='/SchoolServlet?method=findAll&type=2'/>">校内推荐</a></li>
+			<li><a href="<c:url value='/SchoolServlet?method=findAll&type=3'/>">校外推荐</a></li>
 
 			<!-- <li><a href="user-stats.jsp">首页管理(index)</a></li> -->
 			<li class="nav-header"><i class="fa fa-map-marker"></i> 网站导航</li>

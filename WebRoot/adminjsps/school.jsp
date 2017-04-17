@@ -58,7 +58,19 @@
 					<div class="row-fluid">
 						<div class="page-header">
 							<h1>
-								活动 <small>${msg }</small>
+								活动
+								<c:if test="${type==0 }">
+									<small>校内活动</small>
+								</c:if>
+								<c:if test="${type==1 }">
+									<small>校外活动</small>
+								</c:if>
+								<c:if test="${type==2 }">
+									<small>校内推荐活动</small>
+								</c:if>
+								<c:if test="${type==3 }">
+									<small>校外推荐活动</small>
+								</c:if>
 							</h1>
 						</div>
 						<div style="vertical-align: middle; margin-bottom: 20px;">
@@ -76,12 +88,6 @@
 							</span> <span><input type="image" src="<%=basePath%>img/5.jpg"
 								style="width: 40px; height: 24px;" onclick="search()" /></span>
 						</div>
-						<c:if test="${fn:length(type)>8 }">
-							<c:set var="gotos" value='/OutschoolServlet?' />
-						</c:if>
-						<c:if test="${fn:length(type)<9 }">
-							<c:set var="gotos" value='/InschoolServlet?' />
-						</c:if>
 						<table class="table table-striped table-bordered table-condensed">
 							<thead>
 								<tr>
@@ -126,7 +132,7 @@
 													onmouseover="showul()">管理活动 <span class="caret"></span></a>
 												<ul class="dropdown-menu">
 													<li><a
-														href="<c:url value='${ gotos}method=reload&gid=${school.id}'/>"><i
+														href="<c:url value='/SchoolServlet?method=reload&gid=${school.id}'/>"><i
 															class="icon-pencil"></i>修改</a></li>
 													<li><a onclick="firm(${school.id})"
 														style="cursor: pointer;"><i class="icon-trash"></i> 删除</a></li>
@@ -151,15 +157,14 @@
 											test="${curPage>1}">
 											<span class="datatable-paging-first"></span>
 											<span><a
-												href="/Gx${ gotos}method=findAll&curPage=1&datefrom=${datefrom}&dateto=${dateto}&place=${place}">首页</a></span>
+												href="/Gx/SchoolServlet?method=findAll&curPage=1&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">首页</a></span>
 											<span class="datatable-paging-previous"></span>
 											<span style="margin-right: 7px;"><a
-												href="/Gx${ gotos}method=findAll&curPage=${curPage-1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}">上一页</a></span>
+												href="/Gx/SchoolServlet?method=findAll&curPage=${curPage-1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">上一页</a></span>
 										</c:if> <span style="margin-left: 7px;"><a
-											href="/Gx${ gotos}method=findAll&curPage=${curPage+1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}">下一页</a></span>
-										<span class="datatable-paging-next"></span> <span><a
-											href="/Gx${ gotos}method=findAll&curPage=${pb.getPageCount()}&datefrom=${datefrom}&dateto=${dateto}&place=${place}">尾页</a></span><span
-										class="datatable-paging-last"></span> <span
+											href="/Gx/SchoolServlet?method=findAll&curPage=${curPage+1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">下一页</a></span> <span class="datatable-paging-next"></span>
+										<span><a
+											href="/Gx/SchoolServlet?method=findAll&curPage=${pb.getPageCount()}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">尾页</a></span><span class="datatable-paging-last"></span> <span
 										style="margin-left: 7px;">跳转到：</span> <span
 										style="text-align: center;"><input id="showPage"
 											type="text" style="width: 30px; height: 20px;" /></span> <span><input
@@ -172,13 +177,10 @@
 					</div>
 				</div>
 			</div>
-
 			<hr>
-			<%@include file="/adminjsps/foot.jsp"%>
-			<script type="application/javascript">
-				
-				
-						
+<%@include file="/adminjsps/foot.jsp"%>
+<script type="application/javascript">
+					
 $(document).ready(function() {
 	$('.dropdown-menu li a').hover(function() {
 		$(this).children('i').addClass('icon-white');
@@ -210,18 +212,13 @@ $(document).ready(function() {
 			return;
 		}
 		$('body').load(
-				"/Gx" + '${gotos}' + "method=findAll&curPage=" + jumppage+"&datefrom=${datefrom}&dateto=${dateto}&place=${place}");
+				"/Gx/SchoolServlet?method=findAll&curPage=" + jumppage+"&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}");
 	}
-
-			
-			
-			</script>
-			<script type="text/javascript">
-			function firm(gid) {
+</script>
+<script type="text/javascript">
+	function firm(gid) {
 				if (confirm("你确认要删除这条活动?")) {
-					$('body').load(
-							'/Gx' + '${gotos}'
-									+ 'method=delete&gid='+gid);
+					$('body').load('/Gx/SchoolServlet?method=delete&gid='+gid+"&type=${type}");
 				}
 			}
 			function showul(){
@@ -231,9 +228,9 @@ $(document).ready(function() {
 					var datefrom = $("#datefrom").val();
 					var dateto = $('#dateto').val();
 					var place = $('#place').val();
-					var url = "/Gx" + '${gotos}' + "method=findAll&datefrom="
+					var url = "/Gx/SchoolServlet?method=findAll&datefrom="
 							+ datefrom + "&dateto=" + dateto + "&place="
-							+ place;
+							+ place+"&type=${type}";
 					url = encodeURI(url);
 					url = encodeURI(url);
 					/*  $('body').load(url);  */

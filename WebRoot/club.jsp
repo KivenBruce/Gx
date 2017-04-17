@@ -173,7 +173,7 @@ display: none;
 											<c:if test="${item.club_id==keys.key}">
 												<div
 													style="margin-bottom: 6px; margin-left: 95px; margin-top: -26px; color: #9999b3;">
-													<span id="${item.club_id}">${keys.value} </span>人关注
+													<span id="${item.club_id}">${keys.value} </span>人已关注
 												</div>
 											</c:if>
 										</c:forEach>

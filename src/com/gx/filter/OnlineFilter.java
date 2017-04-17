@@ -1,8 +1,6 @@
-package com.gx.web.filter;
+package com.gx.filter;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.sql.SQLException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,9 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 
-import com.gx.user.dao.UserDao;
 
 public class OnlineFilter implements Filter {
 	private String excludedPages;

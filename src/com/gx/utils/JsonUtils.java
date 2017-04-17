@@ -1,4 +1,4 @@
-package com.gx.user.servlet;
+package com.gx.utils;
 
 import java.io.IOException;
 import java.io.StringWriter;

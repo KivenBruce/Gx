@@ -107,6 +107,12 @@
 		url = encodeURI(url);
 		window.location = url;
 	}
+	function selectAll() {
+		var getqu = $("#getqu").val();
+		var url = "/Gx" + '/FrontServlet?' + "method=searchAll&q=" + getqu;
+		url = encodeURI(url);
+		window.location = url;
+	}
 </script>
 </head>
 <body id="homepage" style="background-color: #f7f7f7;">
@@ -165,9 +171,11 @@
 		<c:if test="${pb.getPageCount()!=0 and pb.getPageCount()!=''}">
 			<div id="main" style="height: 40px; margin-bottom: 20px;">
 				<div id="left" onclick="selectIn()"
-					style="float: left; width: 50%; height: 100%; text-align: center; background-color: #fafad2; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校内</div>
+					style="float: left; width: 33%; height: 100%; text-align: center; background-color: #e0ffff; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校内</div>
+				<div id="left" onclick="selectAll()"
+					style="float: left; width: 34%; height: 100%; text-align: center; background-color: #fafad2; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">查看全部</div>				
 				<div id="right" onclick="selectOut()"
-					style="float: left; width: 50%; height: 100%; text-align: center; background-color: #e0ffff; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校外</div>
+					style="float: left; width: 33%; height: 100%; text-align: center; background-color: #e0ffff; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校外</div>
 
 			</div>
 		</c:if>
@@ -186,7 +194,7 @@
 											src="FrontServlet?method=doImage&filepath=${item.gtupian}"
 											style="width: 80px; height: 80px; padding: 0px 10px;" /></td>
 										<td><span style="font-size: 16px;"> <a
-												href="FrontServlet?method=actDetail&gid=${item.id}&gflag=${item.gflag}"
+												href="FrontServlet?method=actDetail&gid=${item.id}"
 												target="_blank"> ${ item.gtheme} </a>
 										</span></td>
 									</tr>
@@ -206,7 +214,7 @@
 							</div>
 							<div
 								style="line-height: 35px; float: right; padding: 0px 10px; margin-top: 20px;">
-								<c:if test="${ item.gflag==0 }">
+								<c:if test="${ item.gflag==0||item.gflag==2 }">
 									<table>
 										<tr>
 											<td><a style="color: #FFA500"
@@ -217,7 +225,7 @@
 										</tr>
 									</table>
 								</c:if>
-								<c:if test="${ item.gflag==1 }">
+								<c:if test="${ item.gflag==1||item.gflag==3 }">
 									<table>
 										<tr>
 											<td><a style="color: #9400D3"
@@ -279,8 +287,8 @@
 							style="margin-left: 7px;">跳转到：</span> <span
 							style="text-align: center;"><input id="showPage"
 								type="text" style="width: 30px; height: 20px;" /></span> <span><input
-								type="image" src="<%=basePath%>img/go.gif"
-								style="width: 30px; height: 20px; border-radius: 4px"
+								type="image" src="<%=basePath%>/adminjsps/img/go.gif"
+								style="width: 30px; height: 20px; border-radius: 4px;vertical-align: middle;"
 								onclick="jumpToPage()" /></span>
 					</span></td>
 				</tr>

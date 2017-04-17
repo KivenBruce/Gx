@@ -1,4 +1,4 @@
-package com.gx.web.filter;
+package com.gx.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

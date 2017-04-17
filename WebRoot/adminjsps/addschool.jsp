@@ -5,6 +5,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/adminjsps/";
+	String type=request.getParameter("type");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -43,44 +44,21 @@
 	margin: 0 35px 15px 0;
 }
 </style>
-
-
 </head>
 <body>
 	<c:if test="${sessionScope.level==1}">
 		<%@include file="/adminjsps/head.jsp"%>
-		<%
-			String type = request.getParameter("type");
-				String url = "/" + type + "schoolServlet?method=addSchool";
-				String cancel = "/" + type + "schoolServlet?method=findAll";
-				if (type.contains("In")) {
-		%>
-		<c:set var="tt" value="0"></c:set>
-		<%
-			} else {
-		%>
-		<c:set var="tt" value="1"></c:set>
-		<%
-			}
-		%>
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<%@include file="/adminjsps/left.jsp"%>
 				<div class="span9">
 					<div class="row-fluid">
-						<div class="page-header">
-							<c:if test="${tt=='0'}">
+						<div class="page-header">							
 								<h1>
 									校内活动 <small>新增信息</small>
-								</h1>
-							</c:if>
-							<c:if test="${tt=='1' }">
-								<h1>
-									校外活动 <small>新增信息</small>
-								</h1>
-							</c:if>
+								</h1>											
 						</div>
-						<form onsubmit="return judge()" action="<c:url value='<%=url%>'/>"
+						<form onsubmit="return judge()" action="<c:url value='/SchoolServlet?method=addSchool&type=<%=type %>'/>"
 							method="post">
 
 							<div class="divv">
@@ -117,15 +95,15 @@
 							<div class="divv">
 								<span>举办内容:<span id="errorinfo" style='padding-left:22px;color:#FF0033'></span>
 									<div style="width: 680px; margin-top: 15px">
-										<script id="editor" type="text/plain">${school.gcontent}</script>
-									</div>
-								</span> <span id="egcontent"></span>
+										<script id="editor" type="text/plain"></script>
+									</div><input name="type" value="<%=type%>"/>
+								</span> <input id="gcontent" name="gcontent" type="hidden"></input>
 							</div>
 							<div
 								style="float: right; margin-right: 190px; margin-top: -80px;">
 								<input type="submit" class="btn btn-success btn-large"
 									value="Save Changes" id="tj" /> <a class="btn"
-									href="<%=path%><%=cancel%>">Cancel</a>
+									href="#">Cancel</a>
 							</div>
 						</form>
 					</div>

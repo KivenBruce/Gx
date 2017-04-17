@@ -238,8 +238,8 @@
 							style="margin-left: 7px;">跳转到：</span> <span
 							style="text-align: center;"><input id="showPage"
 								type="text" style="width: 30px; height: 20px;" /></span> <span><input
-								type="image" src="<%=basePath%>img/go.gif"
-								style="width: 30px; height: 20px; border-radius: 4px"
+								type="image" src="<%=basePath%>/adminjsps/img/go.gif"
+								style="width: 30px; height: 20px; border-radius: 4px;vertical-align: middle;"
 								onclick="jumpToPage()" /></span>
 					</span></td>
 				</tr>

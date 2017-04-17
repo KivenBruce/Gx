@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Cubic - One Page Responsive HTML 5 Website Template</title>
+<title>Cubic - 注册</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Responsive Minimal Bootstrap Theme">
 <meta name="keywords"

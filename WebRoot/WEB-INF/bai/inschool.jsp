@@ -14,7 +14,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Cubic - One Page Responsive HTML 5 Website Template</title>
+<title>Cubic - 校内活动</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Responsive Minimal Bootstrap Theme">
 <meta name="keywords"
@@ -175,7 +175,7 @@
 						</c:if>
 						<c:if test="${Gurl[0]=='0'}">
 							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[0].getId()%>&type=inlist"
+								href="FrontServlet?method=navDetail&gid=<%=navschool[0].getId()%>&type=nav"
 								class="btn-slider" target="_blank">查看 </a>
 						</c:if>
 
@@ -208,7 +208,7 @@
 						</c:if>
 						<c:if test="${Gurl[1]=='0'}">
 							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[1].getId()%>&type=inlist"
+								href="FrontServlet?method=navDetail&gid=<%=navschool[1].getId()%>&type=nav"
 								class="btn-slider" target="_blank">查看 </a>
 						</c:if>
 					</div></li>
@@ -240,7 +240,7 @@
 						</c:if>
 						<c:if test="${Gurl[2]=='0'}">
 							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[2].getId()%>&type=inlist"
+								href="FrontServlet?method=navDetail&gid=<%=navschool[2].getId()%>&type=nav"
 								class="btn-slider" target="_blank">查看 </a>
 						</c:if>
 					</div></li>
@@ -272,7 +272,7 @@
 						</c:if>
 						<c:if test="${Gurl[3]=='0'}">
 							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[3].getId()%>&type=inlist"
+								href="FrontServlet?method=navDetail&gid=<%=navschool[3].getId()%>&type=nav"
 								class="btn-slider" target="_blank">查看 </a>
 						</c:if>
 					</div></li>
@@ -327,7 +327,7 @@
 						<div class="spacer-single"></div>
 					</div>
 					<span style="float: right; font-size: 15px; margin-right: 15px"><a
-						href='FrontServlet?method=moreActive&type=inschool'>更多最新</a></span>
+						href='FrontServlet?method=moreActive&type=in' target="_blank">更多最新</a></span>
 				</div>
 				<br> <br>
 				<div class="row">
@@ -341,7 +341,7 @@
 						</div>
 						<div class="team-desc col-md-12">
 							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[0].getId()%>&type=inschool"><h3><%=newschool[0].getGtheme()%></h3></a>
+								href="FrontServlet?method=navDetail&gid=<%=newschool[0].getId()%>&type=sch"><h3><%=newschool[0].getGtheme()%></h3></a>
 							<p class="lead"><%=newschool[0].getGpart()%></p>
 							<div class="small-border"></div>
 							<p><%=newschool[0].getGcontent()%></p>
@@ -365,7 +365,7 @@
 						</div>
 						<div class="team-desc col-md-12">
 							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[1].getId()%>&type=inschool"><h3><%=newschool[1].getGtheme()%></h3></a>
+								href="FrontServlet?method=navDetail&gid=<%=newschool[1].getId()%>&type=sch"><h3><%=newschool[1].getGtheme()%></h3></a>
 							<p class="lead"><%=newschool[1].getGpart()%></p>
 							<div class="small-border"></div>
 							<p><%=newschool[1].getGcontent()%></p>
@@ -390,7 +390,7 @@
 						</div>
 						<div class="team-desc col-md-12">
 							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[2].getId()%>&type=inschool"><h3><%=newschool[2].getGtheme()%></h3></a>
+								href="FrontServlet?method=navDetail&gid=<%=newschool[2].getId()%>&type=sch"><h3><%=newschool[2].getGtheme()%></h3></a>
 							<p class="lead"><%=newschool[2].getGpart()%></p>
 							<div class="small-border"></div>
 							<p><%=newschool[2].getGcontent()%></p>
@@ -414,7 +414,7 @@
 						</div>
 						<div class="team-desc col-md-12">
 							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[3].getId()%>&type=inschool"><h3><%=newschool[3].getGtheme()%></h3></a>
+								href="FrontServlet?method=navDetail&gid=<%=newschool[3].getId()%>&type=sch"><h3><%=newschool[3].getGtheme()%></h3></a>
 							<p class="lead"><%=newschool[3].getGpart()%></p>
 							<div class="small-border"></div>
 							<p><%=newschool[3].getGcontent()%></p>
@@ -442,7 +442,7 @@
 						<div class="spacer-single"></div>
 					</div>
 					<span style="float: right; font-size: 15px; margin-right: 15px"><a
-						href="FrontServlet?method=moreActive&type=intuijian">更多推荐</a></span>
+						href="FrontServlet?method=moreActive&type=intui" target="_blank">更多推荐</a></span>
 				</div>
 				<div class="row">
 					<!-- team member -->

@@ -53,24 +53,24 @@
 				<div class="row-fluid">
 					<div class="page-header">
 						<h1>
-							<c:if test="${type=='inschool' }">校内活动</c:if>
-							<c:if test="${type=='outschool' }">校外活动</c:if>
+							<c:if test="${type==0 }">
+									校内活动
+								</c:if>
+							<c:if test="${type==1 }">
+									校外活动
+								</c:if>
+							<c:if test="${type==2 }">
+									校内推荐活动
+								</c:if>
+							<c:if test="${type==3 }">
+									校外推荐活动
+								</c:if>
 							<small>更新信息</small>
 						</h1>
 					</div>
 
-					<c:if test="${fn:length(type)>8 }">
-						<c:set var="gotos"
-							value='/OutschoolServlet?method=editSchool&gid=${gid}' />
-					</c:if>
-					<c:if test="${fn:length(type)<9 }">
-						<c:set var="gotos"
-							value='/InschoolServlet?method=editSchool&gid=${gid}' />
-					</c:if>
-
-					<form onsubmit="return judge()" action="<c:url value='${ gotos}'/>"
+					<form onsubmit="return judge()" action="<c:url value='/SchoolServlet?method=editSchool&gid=${school.id }&type=${school.gflag}'/>"
 						method="post">
-
 						<fieldset>
 							<div class="divv">
 								<span> 活动主题: <input type="text" id="gtheme" name="gtheme"
@@ -99,8 +99,8 @@
 								<span> 图片:<input type="file" id="tupian" name="tupian" />
 									<input id="gtupian" name="gtupian" type="hidden"
 									value="${school.gtupian }" />
-								</span><span id="egtupian"></span> <span>
-									活动类型 :<input type="text" id="gremain" name="gremain"
+								</span><span id="egtupian"></span> <span> 活动类型 :<input
+									type="text" id="gremain" name="gremain"
 									value="${school.gremain }" />
 
 								</span><span> 门票|每人 :<input type="text" id="gprice"
@@ -109,30 +109,21 @@
 								</span>
 							</div>
 							<div class="divv">
-								<span>举办内容:<span id="errorinfo" style='padding-left:22px;color:#FF0033'></span>
+								<span>举办内容:<span id="errorinfo"
+									style='padding-left: 22px; color: #FF0033'></span>
 									<div style="width: 680px; margin-top: 15px">
 										<script id="editor" type="text/plain">${school.gcontent}</script>
 									</div>
 								</span> <input id="gcontent" name="gcontent" type="hidden" />
-								<c:if test="${fn:length(type)<9 }">
+								
+								
 									<div
 										style="float: right; margin-right: 190px; margin-top: -50px;">
 										<input type="submit" class="btn btn-success btn-large"
 											value="Save Changes" /> <a class="btn"
-											href="http://localhost:8080/Gx/InschoolServlet?method=findAll">Cancel</a>
-									</div>
-								</c:if>
-								<c:if test="${fn:length(type)>8 }">
-									<div
-										style="float: right; margin-right: 190px; margin-top: -50px;">
-										<input type="submit" class="btn btn-success btn-large"
-											value="Save Changes" /> <a class="btn"
-											href="http://localhost:8080/Gx/OutschoolServlet?method=findAll">Cancel</a>
-									</div>
-								</c:if>
+											href="/Gx/SchoolServlet?method=findAll&type=${type }">Cancel</a>
+									</div>							
 							</div>
-
-
 						</fieldset>
 					</form>
 				</div>
