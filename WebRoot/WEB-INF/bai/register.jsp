@@ -23,6 +23,14 @@
 #style1 {
 	background-color: #428bca;
 }
+.wells {
+	background-color: #2e1e1e;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin-bottom: -60px;
+	min-height: 20px;
+	padding: 19px;
+	text-align: center;
+}
 </style>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="css/jpreloader.css" type="text/css">
@@ -66,7 +74,7 @@
 		<div id="content" class="no-bottom no-top">
 
 			<section id="section-contact" class="dark" data-speed="5"
-				data-type="background">
+				style="height: 570px" data-type="background">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center">
@@ -165,9 +173,10 @@
 			</section>
 			<!-- section close -->
 
-			<div style="margin-top: 50px">
-				<%@include file="/adminjsps/foot.jsp"%>
-			</div>
+			<footer class="wells">
+				Copyright © 1999-2016,<a href="http://www.bistu.edu.cn/"
+					target="_blank" title="Bistu">MyBistu </a>All Rights Reserved
+			</footer>
 		</div>
 	</div>
 
@@ -176,20 +185,13 @@
     ================================================== -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jpreLoader.js"></script>
-
-
 	<script src="js/jquery.prettyPhoto.js"></script>
-
 	<script src="js/jquery.ui.totop.js"></script>
-
-
 	<script src="js/owl.carousel.js"></script>
-
 	<script src="js/classie.js"></script>
 	<script src="js/designesia.js"></script>
 	<script type="text/javascript" src="js/validation-regist.js"
 		charset="UTF-8"></script>
-
 </body>
 <script type="text/javascript">
 <%String mark = (String) request.getAttribute("mark");

@@ -49,6 +49,16 @@
 	response.setDateHeader("Expires", -1);
 	response.setHeader("Cache-Control", "No-store");
 %>
+<style type="text/css">
+.wells {
+	background-color: #2e1e1e;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin-bottom: -60px;
+	min-height: 20px;
+	padding: 19px;
+	text-align: center;
+}
+</style>
 </head>
 <body id="homepage">
 	<div id="wrapper">
@@ -92,7 +102,7 @@
 		<!-- content begin -->
 		<div id="content" class="no-bottom no-top">
 			<!-- section begin -->
-			<section id="section-contact" class="dark" data-speed="5"
+			<section id="section-contact" class="dark" data-speed="5" style="height:570px"
 				data-type="background">
 				<div class="container">
 					<div class="row">
@@ -169,9 +179,10 @@
 			</section>
 			<!-- section close -->
 
-			<div style="margin-top:105px">
-			<%@include file="/adminjsps/foot.jsp"%>
-			</div>
+			<footer class="wells">
+				Copyright © 1999-2016,<a href="http://www.bistu.edu.cn/"
+					target="_blank" title="Bistu">MyBistu </a>All Rights Reserved
+			</footer>
 			
 			<!-- footer close -->
 		</div>
