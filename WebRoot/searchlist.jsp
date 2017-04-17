@@ -42,18 +42,6 @@
 #mainmenu  a {
 	color: #333;
 }
-
-.well {
-	background-color: #51a351;
-	border: 1px solid #e3e3e3;
-	border-radius: 4px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-	margin-bottom: 20px;
-	min-height: 20px;
-	padding: 19px;
-	text-align: center;
-	border: 1px solid #e3e3e3;
-}
 </style>
 <script type="text/javascript">
 	function jumpToPage() {

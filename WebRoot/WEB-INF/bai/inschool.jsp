@@ -1,6 +1,6 @@
-<%@page import="com.gx.front.domain.Navigate"%>
+<%@page import="com.gx.entity.Navigate"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="com.gx.school.domain.School"%>
+<%@page import="com.gx.entity.School"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -68,23 +68,6 @@
 	});
 </script>
 </head>
-<%
-	List<Navigate> navlist = (List<Navigate>) request.getAttribute("navbeanList");
-	Navigate[] navschool = new Navigate[4];
-	for (int i = 0; i < navlist.size(); i++) {
-		navschool[i] = navlist.get(i);
-	}
-	List<School> newlist = (List<School>) request.getAttribute("newbeanList");
-	School[] newschool = new School[4];
-	for (int i = 0; i < 4; i++) {//只显示4个
-		newschool[i] = newlist.get(i);
-	}
-	List<School> tuilist = (List<School>) request.getAttribute("tuibeanList");
-	School[] tuischool = new School[4];//只显示四个
-	for (int i = 0; i < 4; i++) {
-		tuischool[i] = tuilist.get(i);
-	}
-%>
 <body id="homepage">
 	<div id="wrapper">
 		<div class="page-overlay"></div>
@@ -147,135 +130,44 @@
 		<div id="revolution-slider">
 			<ul>
 				<!-- 第一张图片 -->
-				<li data-transition="fade" data-slotamount="10"
-					data-masterspeed="200" data-thumb="images-slider/thumbs/thumb1.jpg"><img
-					src="FrontServlet?method=navImage&filepath=<%=navschool[0].getGtupian()%>"
-					alt="" /> <c:if test="${Gadv[0]==1 }">
-						<div class="tp-caption big-white sft" data-x="center" data-y="165"
+				<c:forEach var="item" items="${navbeanList }">
+					<li data-transition="fade" data-slotamount="10"
+						data-masterspeed="200"
+						data-thumb="images-slider/thumbs/thumb1.jpg"><img
+						src="FrontServlet?method=navImage&filepath=${item.gtupian }"
+						alt="" /> <c:if test="${item.gadv==1 }">
+							<div class="tp-caption big-white sft" data-x="center"
+								data-y="165" data-speed="800" data-start="400"
+								data-easing="easeInOutExpo" data-endspeed="450">
+								<div
+									style="background-color: #ed008c; border-radius: 20px; color: rgb(248, 252, 255); height: 40px; line-height: 40px; text-align: center; width: 100px;">广告</div>
+							</div>
+						</c:if>
+
+						<div class="tp-caption ultra-big-white customin customout start"
+							data-x="center" data-y="center"
+							data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
 							data-speed="800" data-start="400" data-easing="easeInOutExpo"
-							data-endspeed="450">
-							<div
-								style="background-color: #ed008c; border-radius: 20px; color: rgb(248, 252, 255); height: 40px; line-height: 40px; text-align: center; width: 100px;">广告</div>
+							data-endspeed="400">
+							<span>${item.gtheme }</span>
 						</div>
-					</c:if>
 
-					<div class="tp-caption ultra-big-white customin customout start"
-						data-x="center" data-y="center"
-						data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-speed="800" data-start="400" data-easing="easeInOutExpo"
-						data-endspeed="400">
-						<span><%=navschool[0].getGtheme()%></span>
-					</div>
+						<div class="tp-caption sfb" data-x="center" data-y="325"
+							data-speed="400" data-start="800" data-easing="easeInOutExpo">
+							<c:if test="${item.gurl!='0'}">
+								<a href="${item.gurl}" class="btn-slider" target="_blank">查看
+								</a>
+							</c:if>
+							<c:if test="${item.gurl=='0'}">
+								<a href="FrontServlet?method=navDetail&gid=${item.id }&type=nav"
+									target="_blank" class="btn-slider">查看 </a>
+							</c:if>
 
-					<div class="tp-caption sfb" data-x="center" data-y="325"
-						data-speed="400" data-start="800" data-easing="easeInOutExpo">
-						<c:if test="${Gurl[0]!='0'}">
-							<a href="${Gurl[0]}" class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-						<c:if test="${Gurl[0]=='0'}">
-							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[0].getId()%>&type=nav"
-								class="btn-slider" target="_blank">查看 </a>
-						</c:if>
+						</div></li>
 
-					</div></li>
-				<!-- 第2张图片 -->
-				<li data-transition="fade" data-slotamount="10"
-					data-masterspeed="200" data-thumb="images-slider/thumbs/thumb1.jpg"><img
-					src="FrontServlet?method=navImage&filepath=<%=navschool[1].getGtupian()%>"
-					alt="" /> <c:if test="${Gadv[1]==1 }">
-						<div class="tp-caption big-white sft" data-x="center" data-y="165"
-							data-speed="800" data-start="400" data-easing="easeInOutExpo"
-							data-endspeed="450">
-							<div
-								style="background-color: #ed008c; border-radius: 20px; color: rgb(248, 252, 255); height: 40px; line-height: 40px; text-align: center; width: 100px;">广告</div>
-						</div>
-					</c:if>
-					<div class="tp-caption ultra-big-white customin customout start"
-						data-x="center" data-y="center"
-						data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-speed="800" data-start="400" data-easing="easeInOutExpo"
-						data-endspeed="400">
-						<span><%=navschool[1].getGtheme()%></span>
-					</div>
+				</c:forEach>
 
-					<div class="tp-caption sfb" data-x="center" data-y="325"
-						data-speed="400" data-start="800" data-easing="easeInOutExpo">
-						<c:if test="${Gurl[1]!='0'}">
-							<a href="${Gurl[1]}" class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-						<c:if test="${Gurl[1]=='0'}">
-							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[1].getId()%>&type=nav"
-								class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-					</div></li>
-				<!-- 第3张图片 -->
-				<li data-transition="fade" data-slotamount="10"
-					data-masterspeed="200" data-thumb="images-slider/thumbs/thumb1.jpg"><img
-					src="FrontServlet?method=navImage&filepath=<%=navschool[2].getGtupian()%>"
-					alt="" /> <c:if test="${Gadv[2]==1 }">
-						<div class="tp-caption big-white sft" data-x="center" data-y="165"
-							data-speed="800" data-start="400" data-easing="easeInOutExpo"
-							data-endspeed="450">
-							<div
-								style="background-color: #ed008c; border-radius: 20px; color: rgb(248, 252, 255); height: 40px; line-height: 40px; text-align: center; width: 100px;">广告</div>
-						</div>
-					</c:if>
-					<div class="tp-caption ultra-big-white customin customout start"
-						data-x="center" data-y="center"
-						data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-speed="800" data-start="400" data-easing="easeInOutExpo"
-						data-endspeed="400">
-						<span><%=navschool[2].getGtheme()%></span>
-					</div>
-
-					<div class="tp-caption sfb" data-x="center" data-y="325"
-						data-speed="400" data-start="800" data-easing="easeInOutExpo">
-						<c:if test="${Gurl[2]!='0'}">
-							<a href="${Gurl[2]}" class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-						<c:if test="${Gurl[2]=='0'}">
-							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[2].getId()%>&type=nav"
-								class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-					</div></li>
-				<!-- 第4张图片 -->
-				<li data-transition="fade" data-slotamount="10"
-					data-masterspeed="200" data-thumb="images-slider/thumbs/thumb1.jpg"><img
-					src="FrontServlet?method=navImage&filepath=<%=navschool[3].getGtupian()%>"
-					alt="" /> <c:if test="${Gadv[3]==1 }">
-						<div class="tp-caption big-white sft" data-x="center" data-y="165"
-							data-speed="800" data-start="400" data-easing="easeInOutExpo"
-							data-endspeed="450">
-							<div
-								style="background-color: #ed008c; border-radius: 20px; color: rgb(248, 252, 255); height: 40px; line-height: 40px; text-align: center; width: 100px;">广告</div>
-						</div>
-					</c:if>
-					<div class="tp-caption ultra-big-white customin customout start"
-						data-x="center" data-y="center"
-						data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:2;scaleY:2;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.85;scaleY:0.85;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-						data-speed="800" data-start="400" data-easing="easeInOutExpo"
-						data-endspeed="400">
-						<span><%=navschool[3].getGtheme()%></span>
-					</div>
-
-					<div class="tp-caption sfb" data-x="center" data-y="325"
-						data-speed="400" data-start="800" data-easing="easeInOutExpo">
-						<c:if test="${Gurl[3]!='0'}">
-							<a href="${Gurl[3]}" class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-						<c:if test="${Gurl[3]=='0'}">
-							<a
-								href="FrontServlet?method=navDetail&gid=<%=navschool[3].getId()%>&type=nav"
-								class="btn-slider" target="_blank">查看 </a>
-						</c:if>
-					</div></li>
 			</ul>
 		</div>
 	</div>
@@ -332,101 +224,31 @@
 				<br> <br>
 				<div class="row">
 					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=newschool[0].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[0].getId()%>&type=sch"><h3><%=newschool[0].getGtheme()%></h3></a>
-							<p class="lead"><%=newschool[0].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=newschool[0].getGcontent()%></p>
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
+					<c:forEach var="item" items="${newbeanList }" varStatus="status">
+						<c:if test="${status.index<4 }">
+							<div class="de-team-list col-md-3 animated"
+								data-animation="fadeInUp" data-delay="0">
+								<div class="team-pic">
+									<img src="FrontServlet?method=doImage&filepath=${item.gtupian}"
+										alt="" height="263" width="263" />
+								</div>
+								<div class="team-desc col-md-12">
+									<a target="_blank"
+										href="FrontServlet?method=navDetail&gid=${item.id}&type=outschool"><h3>${item.gtheme}</h3></a>
+									<p class="lead">${item.gpart }</p>
+									<div class="small-border"></div>
+									<p>${item.gcontent }</p>
+									<div class="social">
+										<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a
+											href="#"><i class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
+											class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
+											class="fa fa-skype fa-lg"></i></a>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=newschool[1].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[1].getId()%>&type=sch"><h3><%=newschool[1].getGtheme()%></h3></a>
-							<p class="lead"><%=newschool[1].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=newschool[1].getGcontent()%></p>
-
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=newschool[2].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[2].getId()%>&type=sch"><h3><%=newschool[2].getGtheme()%></h3></a>
-							<p class="lead"><%=newschool[2].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=newschool[2].getGcontent()%></p>
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=newschool[3].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=newschool[3].getId()%>&type=sch"><h3><%=newschool[3].getGtheme()%></h3></a>
-							<p class="lead"><%=newschool[3].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=newschool[3].getGcontent()%></p>
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
+						</c:if>
+						<!-- team close -->
+					</c:forEach>
 
 					<div class="clearfix"></div>
 
@@ -446,102 +268,32 @@
 				</div>
 				<div class="row">
 					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=tuischool[0].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=tuischool[0].getId()%>&type=intuijian"><h3><%=tuischool[0].getGtheme()%></h3></a>
-							<p class="lead"><%=tuischool[0].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=tuischool[0].getGcontent()%></p>
+					<c:forEach var="item" items="${tuibeanList }" varStatus="status">
+						<c:if test="${status.index<4 }">
+							<div class="de-team-list col-md-3 animated"
+								data-animation="fadeInUp" data-delay="0">
+								<div class="team-pic">
+									<img
+										src="FrontServlet?method=doImage&filepath=${item.gtupian }"
+										alt="" height="263" width="263" />
+								</div>
+								<div class="team-desc col-md-12">
+									<a target="_blank"
+										href="FrontServlet?method=navDetail&gid=${item.id }&type=outtuijian"><h3>${item.gtheme}</h3></a>
+									<p class="lead">${item.gpart }</p>
+									<div class="small-border"></div>
+									<p>${item.gcontent }</p>
 
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
+									<div class="social">
+										<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a
+											href="#"><i class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
+											class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
+											class="fa fa-skype fa-lg"></i></a>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=tuischool[1].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=tuischool[1].getId()%>&type=intuijian"><h3><%=tuischool[1].getGtheme()%></h3></a>
-							<p class="lead"><%=tuischool[1].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=tuischool[1].getGcontent()%></p>
-
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=tuischool[2].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=tuischool[2].getId()%>&type=intuijian"><h3><%=tuischool[2].getGtheme()%></h3></a>
-							<p class="lead"><%=tuischool[2].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=tuischool[2].getGcontent()%></p>
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
-
-					<!-- team member -->
-					<div class="de-team-list col-md-3 animated"
-						data-animation="fadeInUp" data-delay="0">
-						<div class="team-pic">
-							<img
-								src="FrontServlet?method=doImage&filepath=<%=tuischool[3].getGtupian()%>"
-								alt="" height="263" width="263" />
-						</div>
-						<div class="team-desc col-md-12">
-							<a target="_blank"
-								href="FrontServlet?method=navDetail&gid=<%=tuischool[3].getId()%>&type=intuijian"><h3><%=tuischool[3].getGtheme()%></h3></a>
-							<p class="lead"><%=tuischool[3].getGpart()%></p>
-							<div class="small-border"></div>
-							<p><%=tuischool[3].getGcontent()%></p>
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- team close -->
+						</c:if>
+					</c:forEach>
 
 					<div class="clearfix"></div>
 
@@ -550,25 +302,7 @@
 			</div>
 		</section>
 		<!-- section close -->
-		<!-- footer begin -->
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="social-icons">
-							<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-								class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-								class="fa fa-envelope-o fa-lg"></i></a> <a href="#"><i
-								class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-								class="fa fa-skype fa-lg"></i></a>
-						</div>
-						<div class="spacer-single"></div>
-						© Copyright 2014 - Cubic by Designesia
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- footer close -->
+		<%@include file="/adminjsps/foot.jsp"%>
 	</div>
 	</div>
 </body>

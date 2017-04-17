@@ -10,10 +10,6 @@
 <head>
 <meta charset="utf-8">
 <title>Cubic - 登录</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Responsive Minimal Bootstrap Theme">
-<meta name="keywords"
-	content="onepage,responsive,minimal,bootstrap,theme">
 <meta name="author" content="">
 <meta http-equiv="Expires" CONTENT="0">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
@@ -21,22 +17,14 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://localhost:8080/Gx/logo.ico" />
 <script src="http://localhost:8080/Gx/js/jquery.min.js"></script>
-
-
-<!-- CSS Files
-    ================================================== -->
 <link rel="stylesheet" href="http://localhost:8080/Gx/css/bootstrap.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="http://localhost:8080/Gx/css/jpreloader.css" type="text/css">
 <link rel="stylesheet" href="http://localhost:8080/Gx/css/animate.css"
 	type="text/css">
-
-
-
 <link rel="stylesheet" href="http://localhost:8080/Gx/css/style.css"
 	type="text/css">
-
 <!-- custom style css -->
 <link rel="stylesheet"
 	href="http://localhost:8080/Gx/css/custom-style.css" type="text/css">
@@ -44,8 +32,6 @@
 <!-- color scheme -->
 <link rel="stylesheet" href="http://localhost:8080/Gx/css/color.css"
 	type="text/css">
-
-
 <!-- load fonts -->
 <link rel="stylesheet"
 	href="http://localhost:8080/Gx/fonts/font-awesome/css/font-awesome.css"
@@ -63,25 +49,10 @@
 	response.setDateHeader("Expires", -1);
 	response.setHeader("Cache-Control", "No-store");
 %>
-<script type="text/javascript">
-$(function(){
-    if (window.history && window.history.pushState) {
-        $(window).on('popstate', function () {
-              window.history.forward(1);
-        });
-      }
-})
-</script>
 </head>
-
 <body id="homepage">
-
-
-
 	<div id="wrapper">
 		<div class="page-overlay"></div>
-
-
 		<!-- header begin -->
 		<header>
 			<div class="container">
@@ -198,24 +169,10 @@ $(function(){
 			</section>
 			<!-- section close -->
 
-			<!-- footer begin -->
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<div class="social-icons">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-envelope-o fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-							<div class="spacer-single"></div>
-							© Copyright 2014 - Cubic by Designesia
-						</div>
-					</div>
-				</div>
-			</footer>
+			<div style="margin-top:105px">
+			<%@include file="/adminjsps/foot.jsp"%>
+			</div>
+			
 			<!-- footer close -->
 		</div>
 	</div>
@@ -225,15 +182,9 @@ $(function(){
     ================================================== -->
 	<script src="http://localhost:8080/Gx/js/jquery.min.js"></script>
 	<script src="http://localhost:8080/Gx/js/jpreLoader.js"></script>
-
-
 	<script src="http://localhost:8080/Gx/js/jquery.prettyPhoto.js"></script>
-
 	<script src="http://localhost:8080/Gx/js/jquery.ui.totop.js"></script>
-
-
 	<script src="http://localhost:8080/Gx/js/owl.carousel.js"></script>
-
 	<script src="http://localhost:8080/Gx/js/classie.js"></script>
 	<script src="http://localhost:8080/Gx/js/designesia.js"></script>
 	<script src="http://localhost:8080/Gx/js/validation-login.js"></script>

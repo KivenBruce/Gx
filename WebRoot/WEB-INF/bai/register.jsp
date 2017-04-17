@@ -16,11 +16,12 @@
 	content="onepage,responsive,minimal,bootstrap,theme">
 <meta name="author" content="">
 <style type="text/css">
-#reset_message{
-background-color:black;
+#reset_message {
+	background-color: black;
 }
-#style1{
-background-color:#428bca;
+
+#style1 {
+	background-color: #428bca;
 }
 </style>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
@@ -53,7 +54,7 @@ background-color:#428bca;
 
 						<nav>
 							<ul id="mainmenu">
-								<li><a href="Index">首页</a></li>					
+								<li><a href="Index">首页</a></li>
 								<li><a href="Login">登陆</a></li>
 							</ul>
 						</nav>
@@ -61,7 +62,7 @@ background-color:#428bca;
 					</div>
 				</div>
 			</div>
-		</header>	
+		</header>
 		<div id="content" class="no-bottom no-top">
 
 			<section id="section-contact" class="dark" data-speed="5"
@@ -85,10 +86,10 @@ background-color:#428bca;
 								<div class="row">
 									<div class="col-md-6">
 										<div id='name_error' class='error'>用户名不能为空！</div>
-										<div id='regist_error' class='error' style="display:none">该用户已经被注册！</div>
+										<div id='regist_error' class='error' style="display: none">该用户已经被注册！</div>
 										<div>
-											<input type='text' name='name' id='name' class="form-control" maxlength="10"
-												placeholder="用户名">
+											<input type='text' name='name' id='name' class="form-control"
+												maxlength="10" placeholder="用户名">
 										</div>
 									</div>
 									<div class="col-md-8"></div>
@@ -123,7 +124,7 @@ background-color:#428bca;
 												placeholder="电话号码">
 										</div>
 									</div>
-									<div class="col-md-8"></div>								
+									<div class="col-md-8"></div>
 
 									<div id='mail_success' class='success'>Your message has
 										been sent successfully.</div>
@@ -135,8 +136,10 @@ background-color:#428bca;
 												<p id='submit'>
 													<input type='submit' id='send_message' value='提 交'
 														class="btn btn-border" style="margin-left: 100px">
-													<input type='reset'  value='重置' id='reset_message'
-														class="btn btn-border" style="margin-left: 10px" onmouseover="this.id='style1'" onmouseout="this.id='reset_message'">
+													<input type='reset' value='重置' id='reset_message'
+														class="btn btn-border" style="margin-left: 10px"
+														onmouseover="this.id='style1'"
+														onmouseout="this.id='reset_message'">
 												</p>
 											</td>
 										</tr>
@@ -162,25 +165,9 @@ background-color:#428bca;
 			</section>
 			<!-- section close -->
 
-			<!-- footer begin -->
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<div class="social-icons">
-								<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a href="#"><i
-									class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-									class="fa fa-envelope-o fa-lg"></i></a> <a href="#"><i
-									class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-									class="fa fa-skype fa-lg"></i></a>
-							</div>
-							<div class="spacer-single"></div>
-							© Copyright 2014 - Cubic by Designesia
-						</div>
-					</div>
-				</div>
-			</footer>
-			<!-- footer close -->
+			<div style="margin-top: 50px">
+				<%@include file="/adminjsps/foot.jsp"%>
+			</div>
 		</div>
 	</div>
 
@@ -200,7 +187,8 @@ background-color:#428bca;
 
 	<script src="js/classie.js"></script>
 	<script src="js/designesia.js"></script>
-	<script type="text/javascript" src="js/validation-regist.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/validation-regist.js"
+		charset="UTF-8"></script>
 
 </body>
 <script type="text/javascript">
@@ -213,8 +201,7 @@ background-color:#428bca;
 	document.getElementById("pwd2").value="<%=request.getAttribute("pwd2")%>";
 	document.getElementById("email").value="<%=request.getAttribute("email")%>";
 	document.getElementById("tel").value="<%=request.getAttribute("tel")%>";
-<%}
-%>
+<%}%>
 	
 </script>
 </html>

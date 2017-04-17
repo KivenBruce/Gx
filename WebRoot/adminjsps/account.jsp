@@ -59,20 +59,6 @@
 	}
 </script>
 <style type="text/css">
-.well {
-	background-color: #51a351;
-	border: 1px solid #e3e3e3;
-	border-radius: 4px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-	margin: 0;
-	min-height: 20px;
-	padding: 19px;
-	text-align: center;
-	border: 1px solid #e3e3e3;
-	width: 100%;
-	z-index: 1000;
-}
-
 #userinfo {
 	font-size: 20px;
 	margin-left: 20px;
@@ -106,7 +92,7 @@
 	position: absolute;
 	margin-left: 10px;
 }
-}
+
 </style>
 </head>
 <body style="margin-top: 50px; background-color: #f0f0f0;">
@@ -308,7 +294,7 @@
 
 	</div>
 	<!-- footer -->
-	<div style="bottom: 0; position: fixed; width: 100%">
+	<div style="bottom: 60px; position: fixed; width: 100%">
 		<%@include file="/adminjsps/foot.jsp"%>
 	</div>
 
