@@ -61,7 +61,7 @@
 								修改用户 <small>User Edit</small>
 							</h1>
 						</div>
-						<form onsubmit="return judge()"
+						<form onsubmit="return judge()" enctype="multipart/form-data"
 							action="<c:url value='/UserServlet?method=editUser&gid=${gid}'/>"
 							method="post">
 							<div id="userinfo">

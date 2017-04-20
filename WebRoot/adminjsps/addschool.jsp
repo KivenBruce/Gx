@@ -103,7 +103,7 @@
 								style="float: right; margin-right: 190px; margin-top: -80px;">
 								<input type="submit" class="btn btn-success btn-large"
 									value="Save Changes" id="tj" /> <a class="btn"
-									href="#">Cancel</a>
+									href="http://localhost:8080/Gx/SchoolServlet?method=findAll">Cancel</a>
 							</div>
 						</form>
 					</div>

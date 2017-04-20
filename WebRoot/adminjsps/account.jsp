@@ -171,7 +171,7 @@
 						<span id="focuscount" >${fn:length(pb.beanList)}</span></li>
 					<li class="menu menu-item" data-hash="follow">我的点赞
 						${likecount}</li>
-					<li class="menu menu-item last" data-hash="follower">我的评论
+					<li class="menu menu-item last" data-hash="follower">我的动态
 						${commentCount}</li>
 				</ul>
 			</div>
@@ -221,7 +221,7 @@
 		<!-- 我的信息 -->
 		<div class="ui-user-item" id="q2">
 			<h2>我的信息</h2>
-			<form onsubmit="return judge()" style="background-color: white"
+			<form onsubmit="return judge()" style="background-color: white" enctype="multipart/form-data"
 				action="javascript:;" id="userform" method="post">
 				<div id="userinfo">
 					<div class="divv">
