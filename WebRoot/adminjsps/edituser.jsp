@@ -41,9 +41,10 @@
 
 .divv input {
 	color: #997777;
-	font-size: 18px;
+	font-size: 15px;
 	margin-left: 10px;
 	width: 250px;
+	font-weight: 600;
 }
 </style>
 

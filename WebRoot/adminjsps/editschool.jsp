@@ -69,7 +69,8 @@
 						</h1>
 					</div>
 
-					<form onsubmit="return judge()" action="<c:url value='/SchoolServlet?method=editSchool&gid=${school.id }&type=${school.gflag}'/>"
+					<form onsubmit="return judge()"
+						action="<c:url value='/SchoolServlet?method=editSchool&gid=${school.id }&type=${school.gflag}'/>"
 						method="post">
 						<fieldset>
 							<div class="divv">
@@ -115,14 +116,14 @@
 										<script id="editor" type="text/plain">${school.gcontent}</script>
 									</div>
 								</span> <input id="gcontent" name="gcontent" type="hidden" />
-								
-								
-									<div
-										style="float: right; margin-right: 190px; margin-top: -50px;">
-										<input type="submit" class="btn btn-success btn-large"
-											value="Save Changes" /> <a class="btn"
-											href="/Gx/SchoolServlet?method=findAll&type=${type }">Cancel</a>
-									</div>							
+
+
+								<div
+									style="float: right; margin-right: 190px; margin-top: -50px;">
+									<input type="submit" class="btn btn-success btn-large"
+										value="Save Changes" /> <a class="btn"
+										href="/Gx/SchoolServlet?method=findAll&type=${type }">Cancel</a>
+								</div>
 							</div>
 						</fieldset>
 					</form>
@@ -132,7 +133,9 @@
 
 		<hr>
 
-		<%@include file="/adminjsps/foot.jsp"%>
+		<div style="bottom: 0; position: fixed; width: 97%">
+			<%@include file="/adminjsps/foot.jsp"%>
+		</div>
 
 	</div>
 	<script type="text/javascript">

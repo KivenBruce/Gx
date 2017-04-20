@@ -162,9 +162,10 @@
 											<span style="margin-right: 7px;"><a
 												href="/Gx/SchoolServlet?method=findAll&curPage=${curPage-1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">上一页</a></span>
 										</c:if> <span style="margin-left: 7px;"><a
-											href="/Gx/SchoolServlet?method=findAll&curPage=${curPage+1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">下一页</a></span> <span class="datatable-paging-next"></span>
-										<span><a
-											href="/Gx/SchoolServlet?method=findAll&curPage=${pb.getPageCount()}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">尾页</a></span><span class="datatable-paging-last"></span> <span
+											href="/Gx/SchoolServlet?method=findAll&curPage=${curPage+1}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">下一页</a></span>
+										<span class="datatable-paging-next"></span> <span><a
+											href="/Gx/SchoolServlet?method=findAll&curPage=${pb.getPageCount()}&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}">尾页</a></span><span
+										class="datatable-paging-last"></span> <span
 										style="margin-left: 7px;">跳转到：</span> <span
 										style="text-align: center;"><input id="showPage"
 											type="text" style="width: 30px; height: 20px;" /></span> <span><input
@@ -178,8 +179,9 @@
 				</div>
 			</div>
 			<hr>
-<%@include file="/adminjsps/foot.jsp"%>
-<script type="application/javascript">
+			
+			<script type="application/javascript">
+				
 					
 $(document).ready(function() {
 	$('.dropdown-menu li a').hover(function() {
@@ -214,8 +216,9 @@ $(document).ready(function() {
 		$('body').load(
 				"/Gx/SchoolServlet?method=findAll&curPage=" + jumppage+"&datefrom=${datefrom}&dateto=${dateto}&place=${place}&type=${type}");
 	}
-</script>
-<script type="text/javascript">
+
+			</script>
+			<script type="text/javascript">
 	function firm(gid) {
 				if (confirm("你确认要删除这条活动?")) {
 					$('body').load('/Gx/SchoolServlet?method=delete&gid='+gid+"&type=${type}");
@@ -238,6 +241,9 @@ $(document).ready(function() {
 				}
 			</script>
 		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
+				<%@include file="/adminjsps/foot.jsp"%>
+			</div>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">
 		<h1 style="text-align: center">你没有权限访问此页面</h1>

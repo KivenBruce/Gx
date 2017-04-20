@@ -227,7 +227,7 @@ display: none;
 				</div>
 			</div>
 		
-		<div style="margin-left: -900px; margin-top: 90px;width: 1365px;">
+		<div style="position: fixed; margin-left: -900px; bottom: -20px; width: 1375px;">
 	    <%@include file="/adminjsps/foot.jsp"%>
 	    </div>
 		

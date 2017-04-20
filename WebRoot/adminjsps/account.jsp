@@ -294,7 +294,7 @@
 
 	</div>
 	<!-- footer -->
-	<div style="bottom: 60px; position: fixed; width: 100%">
+	<div style="bottom: -20px; position: fixed; width: 100%">
 		<%@include file="/adminjsps/foot.jsp"%>
 	</div>
 

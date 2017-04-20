@@ -146,6 +146,9 @@ function showul(e){
 				</div>
 			</div>
 			<hr>
+			
+		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
 			<%@include file="/adminjsps/foot.jsp"%>
 		</div>
 	</c:if>

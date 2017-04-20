@@ -5,7 +5,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/adminjsps/";
-	String type=request.getParameter("type");
+	String type = request.getParameter("type");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -53,12 +53,13 @@
 				<%@include file="/adminjsps/left.jsp"%>
 				<div class="span9">
 					<div class="row-fluid">
-						<div class="page-header">							
-								<h1>
-									校内活动 <small>新增信息</small>
-								</h1>											
+						<div class="page-header">
+							<h1>
+								校内活动 <small>新增信息</small>
+							</h1>
 						</div>
-						<form onsubmit="return judge()" action="<c:url value='/SchoolServlet?method=addSchool&type=<%=type %>'/>"
+						<form onsubmit="return judge()"
+							action="<c:url value='/SchoolServlet?method=addSchool&type=<%=type%>'/>"
 							method="post">
 
 							<div class="divv">
@@ -93,10 +94,12 @@
 								</span>
 							</div>
 							<div class="divv">
-								<span>举办内容:<span id="errorinfo" style='padding-left:22px;color:#FF0033'></span>
+								<span>举办内容:<span id="errorinfo"
+									style='padding-left: 22px; color: #FF0033'></span>
 									<div style="width: 680px; margin-top: 15px">
 										<script id="editor" type="text/plain"></script>
-									</div><input name="type" value="<%=type%>"/>
+									</div>
+									<input name="type" value="<%=type%>" type="hidden" />
 								</span> <input id="gcontent" name="gcontent" type="hidden"></input>
 							</div>
 							<div
@@ -110,9 +113,12 @@
 				</div>
 			</div>
 			<hr>
-			<%@include file="/adminjsps/foot.jsp"%>
-
+			
 		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
+				<%@include file="/adminjsps/foot.jsp"%>
+			</div>
+		
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">
 		<h1 style="text-align: center">你没有权限访问此页面</h1>

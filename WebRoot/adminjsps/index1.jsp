@@ -29,7 +29,7 @@
 			<div class="row-fluid">
 				<%@include file="/adminjsps/left.jsp"%>
 				<div class="span9">
-					<div class="well hero-unit">
+					<div class="wells hero-unit">
 						<h1>
 							Welcome,<%=session.getAttribute("name")%></h1>
 						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
@@ -37,8 +37,8 @@
 							auctor massa. Pellentesque habitant morbi tristique senectus et
 							netus et malesuada fames ac turpis egestas.</p>
 						<p>
-							<a class="btn btn-success btn-large"
-								href="adduser.jsp">添加用户 &raquo;</a>
+							<a class="btn btn-success btn-large" href="adduser.jsp">添加用户
+								&raquo;</a>
 						</p>
 					</div>
 					<div>
@@ -58,15 +58,18 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
-			<hr>
+		</div>
+		<hr>
+		<div style="bottom: 0; position: fixed; width: 100%">
 			<%@include file="/adminjsps/foot.jsp"%>
-			<script src="js/jquery.js"></script>
-			<script src="js/bootstrap.min.js"></script>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">
-	<h1 style="text-align: center">你没有权限访问此页面</h1>
+		<h1 style="text-align: center">你没有权限访问此页面</h1>
 	</c:if>
 </body>
 </html>

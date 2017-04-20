@@ -302,7 +302,7 @@
 			</div>
 		</section>
 		<!-- section close -->
-		<%@include file="/adminjsps/foot.jsp"%>
+			<%@include file="/adminjsps/foot.jsp"%>
 	</div>
 	</div>
 </body>

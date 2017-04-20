@@ -206,8 +206,11 @@
 				</div>
 			</div>
 			<hr>
-			<%@include file="/adminjsps/foot.jsp"%>
+			
 		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
+				<%@include file="/adminjsps/foot.jsp"%>
+			</div>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">
 		<h1 style="text-align: center">你没有权限访问此页面</h1>

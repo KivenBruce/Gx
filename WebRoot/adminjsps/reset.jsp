@@ -115,7 +115,9 @@ function judge() {
 
 			<hr>
 
+			<div style="bottom: 0; position: fixed; width: 97%">
 			<%@include file="/adminjsps/foot.jsp"%>
+		</div>
 
 		</div>
 	</c:if>

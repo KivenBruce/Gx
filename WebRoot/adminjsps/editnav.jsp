@@ -135,7 +135,9 @@
 			</div>
 		</div>
 		<hr>
-		<%@include file="/adminjsps/foot.jsp"%>
+		<div style="bottom: 0; position: fixed; width: 97%">
+			<%@include file="/adminjsps/foot.jsp"%>
+		</div>
 
 	</div>
 	<script type="text/javascript">
