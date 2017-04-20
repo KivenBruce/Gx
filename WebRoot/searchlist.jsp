@@ -101,6 +101,12 @@
 		url = encodeURI(url);
 		window.location = url;
 	}
+
+	function changeNum(e){
+		var num=$("#"+e).text();
+		var newnum=Number(num)+1;
+		$("#"+e).text(newnum);
+	}
 </script>
 </head>
 <body id="homepage" style="background-color: #f7f7f7;">
@@ -119,10 +125,9 @@
 							</a>
 						</h1>
 						<span id="menu-btn"></span> <span id="newinput"><input
-							id="q" name="q" autocomplete="off"
-							value="" maxlength="280px" placeholder="搜索你感兴趣的内容..." type="text" /></span>
-						<span><input id="searchimg" type="image"
-							src="/Gx/adminjsps/img/search1.png"
+							id="q" name="q" autocomplete="off" value="" maxlength="280px"
+							placeholder="搜索你感兴趣的内容..." type="text" /></span> <span><input
+							id="searchimg" type="image" src="/Gx/adminjsps/img/search1.png"
 							style="width: 40px; vertical-align: middle; margin-left: -4px; border-radius: 4px"
 							onclick="search()" /></span>
 
@@ -141,8 +146,10 @@
 					</div>
 					<div id="countinfo">
 						<ul id="myul" class="">
-							<li><a href="<c:url value='/UserServlet?method=reloadAccount'/>" style="text-decoration: none"> <i
-									style="margin-top: 5px" class="fa  fa-rebel"></i> 我的主页
+							<li><a
+								href="<c:url value='/UserServlet?method=reloadAccount'/>"
+								style="text-decoration: none"> <i style="margin-top: 5px"
+									class="fa  fa-rebel"></i> 我的主页
 							</a></li>
 							<li><a href="Logout.do" style="text-decoration: none"> <i
 									style="margin-top: 5px" class="fa  fa-power-off"></i> 注 销
@@ -161,7 +168,7 @@
 				<div id="left" onclick="selectIn()"
 					style="float: left; width: 33%; height: 100%; text-align: center; background-color: #e0ffff; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校内</div>
 				<div id="left" onclick="selectAll()"
-					style="float: left; width: 34%; height: 100%; text-align: center; background-color: #fafad2; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">查看全部</div>				
+					style="float: left; width: 34%; height: 100%; text-align: center; background-color: #fafad2; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">查看全部</div>
 				<div id="right" onclick="selectOut()"
 					style="float: left; width: 33%; height: 100%; text-align: center; background-color: #e0ffff; border-radius: 8px; line-height: 40px; font-size: 30px; cursor: pointer;">只看校外</div>
 
@@ -181,7 +188,7 @@
 										<td rowspan="4"><img alt="图标"
 											src="FrontServlet?method=doImage&filepath=${item.gtupian}"
 											style="width: 80px; height: 80px; padding: 0px 10px;" /></td>
-										<td><span style="font-size: 16px;"> <a
+										<td><span style="font-size: 16px;"> <a onclick="changeNum('${item.id}')"
 												href="FrontServlet?method=actDetail&gid=${item.id}"
 												target="_blank"> ${ item.gtheme} </a>
 										</span></td>
@@ -202,28 +209,22 @@
 							</div>
 							<div
 								style="line-height: 35px; float: right; padding: 0px 10px; margin-top: 20px;">
-								<c:if test="${ item.gflag==0||item.gflag==2 }">
-									<table>
-										<tr>
+
+								<table>
+									<tr>
+										<c:if test="${ item.gflag==0||item.gflag==2 }">
 											<td><a style="color: #FFA500"
 												href="<c:url value='/FrontServlet?method=findAll&type=in'/>">校内活动</a></td>
-										</tr>
-										<tr>
-											<td>已浏览: ${item.gvisits}</td>
-										</tr>
-									</table>
-								</c:if>
-								<c:if test="${ item.gflag==1||item.gflag==3 }">
-									<table>
-										<tr>
+										</c:if>
+										<c:if test="${ item.gflag==1||item.gflag==3 }">
 											<td><a style="color: #9400D3"
 												href="<c:url value='/FrontServlet?method=findAll&type=out'/>">校外活动</a></td>
-										</tr>
-										<tr>
-											<td>已浏览: ${item.gvisits}</td>
-										</tr>
-									</table>
-								</c:if>
+										</c:if>
+									</tr>
+									<tr>
+										<td>已浏览: <span  id="${item.id}">${item.gvisits}</span></td>
+									</tr>
+								</table>
 							</div>
 							<c:remove var="key" />
 							<div style="clear: both;"></div>
@@ -276,7 +277,7 @@
 							style="text-align: center;"><input id="showPage"
 								type="text" style="width: 30px; height: 20px;" /></span> <span><input
 								type="image" src="<%=basePath%>/adminjsps/img/go.gif"
-								style="width: 30px; height: 20px; border-radius: 4px;vertical-align: middle;"
+								style="width: 30px; height: 20px; border-radius: 4px; vertical-align: middle;"
 								onclick="jumpToPage()" /></span>
 					</span></td>
 				</tr>
