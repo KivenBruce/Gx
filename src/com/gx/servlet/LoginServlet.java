@@ -43,7 +43,7 @@ public class LoginServlet
     String username = (String)session.getAttribute("name");
     if ((username != null) && (request.getParameter("pwd") == null))
     {
-      session.setMaxInactiveInterval(600);
+      session.setMaxInactiveInterval(6000);
       
       VisitDao visitDao = new VisitDao();
       Date date = new Date();
@@ -108,7 +108,7 @@ public class LoginServlet
               session.setAttribute("name", request.getParameter("name"));
               session.setAttribute("pwd", password);
               session.setAttribute("level", user.getLevel());
-              session.setMaxInactiveInterval(600);
+              session.setMaxInactiveInterval(6000);
               
               VisitDao visitDao = new VisitDao();
               Date date = new Date();

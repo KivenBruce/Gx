@@ -160,6 +160,23 @@ public String getGremain()
     this.Gremain = gremain;
   }
   
-  public Navigate() {}
+  public Navigate(String gtheme, String gpart, String gtime, String gcontent, String gusername, int gperson,
+		String gprice, String gplace, String gtupian, int gadv, String gurl, String gremain) {
+	super();
+	Gtheme = gtheme;
+	Gpart = gpart;
+	Gtime = gtime;
+	Gcontent = gcontent;
+	Gusername = gusername;
+	Gperson = gperson;
+	Gprice = gprice;
+	Gplace = gplace;
+	Gtupian = gtupian;
+	Gadv = gadv;
+	Gurl = gurl;
+	Gremain = gremain;
+}
+
+public Navigate() {}
 }
 

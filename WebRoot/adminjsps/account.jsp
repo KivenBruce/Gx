@@ -176,13 +176,66 @@
 				</ul>
 			</div>
 			<ul class="content-menu">
-				<li class="menu menu-item active" id="i1">我的club</li>
-				<li class="menu menu-item" id="i2">我的信息</li>
+			    <li class="menu menu-item  active" id="i2">我的信息</li>
+				<li class="menu menu-item" id="i1">我的club</li>			
 				<li class="menu menu-item" id="i3">密码管理</li>
 			</ul>
 		</div>
+		<!-- 我的信息 -->
+		<div class="ui-user-item" id="q2"  style="display: block">
+			<h2>我的信息 <span style="color:#FF0033">${error}</span></h2>
+			<form onsubmit="return judge()" style="background-color: white" enctype="multipart/form-data"
+				action="/Gx/UserServlet?method=editAccount&gid=${gid}" id="userform" method="post">
+				<div id="userinfo">
+					<div class="divv">
+						<span> 用户名 :<input type="text" id="gusername"
+							name="gusername" value="${user.gusername }" />
+						</span> <span id="egname"></span>
+					</div>
+					<div class="divv">
+						<span> 邮&nbsp&nbsp&nbsp&nbsp&nbsp箱:<input type="text"
+							id="gmail" name="gmail" value="${user.gmail }" />
+						</span> <span id='email_error' class='error'>**邮箱格式不正确!</span>
+					</div>
+					<div class="divv">
+						<span> 手&nbsp&nbsp&nbsp&nbsp&nbsp机:<input type="text"
+							id="gtel" name="gtel" value="${user.gtel }" />
+						</span><span id='tel_error' class='error'>**电话号码格式不正确!</span>
+					</div>
+					<div class="divv">
+						<span> 头&nbsp&nbsp&nbsp&nbsp&nbsp像:<input type="file"
+							id="gimage" name="gimage" value="${user.gimage }" />
+							<input type="hidden" id="defaultimg" name="defaultimg" value="${user.gimage }" />
+						</span>
+					</div>
+					
+					<div class="divv">
+						<span> 性&nbsp&nbsp&nbsp&nbsp&nbsp别:<input type="radio" name="gsex" id="gsex" class="input-xlarge" style="width: 30px"
+										<c:if test="${user.gsex eq '男' }">checked</c:if> value="男" />男 <input type="radio" name="gsex" style="width: 30px"
+										id="gsex" class="input-xlarge" <c:if test="${user.gsex eq '女' }">checked</c:if>
+										value="女" />女</span>
+					</div>
+					
+					<div class="divv">
+						<span> 签&nbsp&nbsp&nbsp&nbsp&nbsp名:<input type="text"
+							id="gtitle" name="gtitle" value="${user.gtitle }" />
+						</span> <span id="etitle"></span>
+					</div>
+					<div class="form-actions"
+						style="margin-left: 10px; margin-top: 20px; padding-bottom: 10px;">
+						<input type="submit" class="btn btn-success btn-large"
+							id="send_message" value="保存修改" id="tj" /> <input id="gid"
+							type="hidden" value="${gid}">
+						<!-- <button onclick="window.history.back()"
+							style="border: 1px solid #31c37c; border-radius: 8px; color: #ed008c; font-size: 13px; height: 30px; width: 40px;">取
+							消</button> -->
+					</div>
+				</div>
+			</form>
+		</div>
+		
 		<!-- 我的club -->
-		<div class="ui-user-item" id="q1" style="display: block">
+		<div class="ui-user-item" id="q1">
 			<h2>我关注的Club</h2>
 
 			<div class="ui-body">
@@ -218,49 +271,8 @@
 			</div>
 
 		</div>
-		<!-- 我的信息 -->
-		<div class="ui-user-item" id="q2">
-			<h2>我的信息</h2>
-			<form onsubmit="return judge()" style="background-color: white" enctype="multipart/form-data"
-				action="javascript:;" id="userform" method="post">
-				<div id="userinfo">
-					<div class="divv">
-						<span> 用户名 :<input type="text" id="gusername"
-							name="gusername" value="${user.gusername }" />
-						</span> <span id="egname"></span>
-					</div>
-					<div class="divv">
-						<span> 邮&nbsp&nbsp&nbsp&nbsp&nbsp箱:<input type="text"
-							id="gmail" name="gmail" value="${user.gmail }" />
-						</span> <span id='email_error' class='error'>**邮箱格式不正确!</span>
-					</div>
-					<div class="divv">
-						<span> 手&nbsp&nbsp&nbsp&nbsp&nbsp机:<input type="text"
-							id="gtel" name="gtel" value="${user.gtel }" />
-						</span><span id='tel_error' class='error'>**电话号码格式不正确!</span>
-					</div>
-					<div class="divv">
-						<span> 头&nbsp&nbsp&nbsp&nbsp&nbsp像:<input type="file"
-							id="gimage" name="gimage" value="${user.gimage }" />
-						</span>
-					</div>
-					<div class="divv">
-						<span> 签&nbsp&nbsp&nbsp&nbsp&nbsp名:<input type="text"
-							id="gtitle" name="gtitle" value="${user.gtitle }" />
-						</span> <span id="etitle"></span>
-					</div>
-					<div class="form-actions"
-						style="margin-left: 10px; margin-top: 20px; padding-bottom: 10px;">
-						<input type="submit" class="btn btn-success btn-large"
-							id="send_message" value="保存修改" id="tj" /> <input id="gid"
-							type="hidden" value="${gid}">
-						<!-- <button onclick="window.history.back()"
-							style="border: 1px solid #31c37c; border-radius: 8px; color: #ed008c; font-size: 13px; height: 30px; width: 40px;">取
-							消</button> -->
-					</div>
-				</div>
-			</form>
-		</div>
+	
+		
 
 		<!-- 密码管理 -->
 		<div class="ui-user-item" id="q3">

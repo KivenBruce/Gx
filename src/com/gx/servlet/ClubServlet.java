@@ -1,12 +1,17 @@
 package com.gx.servlet;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
-
 import com.gx.dao.ClubDao;
 import com.gx.dao.CommentDao;
 import com.gx.dao.UserDao;
@@ -218,44 +226,7 @@ public class ClubServlet extends BaseServlet {
 		return clubDetail(request, response);
 	}
 
-	/**
-	 * ajax测试方法
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
-	 * @throws SQLException
-	 */
-	/*
-	 * public void test(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException, SQLException { String
-	 * urlparentid = request.getParameter("parentid");
-	 * System.out.println(urlparentid); int parentid; boolean flag; if
-	 * (urlparentid != null) { parentid = Integer.parseInt(urlparentid); flag =
-	 * true; } else { parentid = 1234; flag = false; }
-	 * 
-	 * HttpSession session = request.getSession(); User user =
-	 * userDao.findByName(session.getAttribute("name").toString());
-	 * 
-	 * PageBean<Club> pb = (PageBean<Club>) clubDao.findAll(flag, user.getId(),
-	 * parentid); List<Club> beanList = pb.getBeanList(); Number focusNum =
-	 * clubDao.findFocus(user.getId());
-	 * 
-	 * System.out.println("============================================");
-	 * JSONArray json = new JSONArray(); for(Club c : beanList){ JSONObject jo =
-	 * new JSONObject(); jo.put("id", c.getId()); jo.put("Club_id",
-	 * c.getClub_id()); jo.put("Comment_count", c.getComment_count());
-	 * jo.put("Gflag", c.getGflag()); jo.put("Isfocus", c.getIsfocus());
-	 * jo.put("Like_count", c.getLike_count()); jo.put("Parent_id",
-	 * c.getParent_id()); jo.put("User_id", c.getUser_id()); jo.put("Club_desc",
-	 * c.getClub_desc()); jo.put("Club_image", c.getClub_image());
-	 * jo.put("Club_name", c.getClub_name()); jo.put("Club_parent",
-	 * c.getClub_parent()); json.put(jo); } try {
-	 * System.out.println(json.toString());
-	 * response.getWriter().write(json.toString()); } catch (IOException e) {
-	 * e.printStackTrace(); } }
-	 */
+	
 	/**
 	 * 处理图片方法
 	 * 
@@ -302,5 +273,5 @@ public class ClubServlet extends BaseServlet {
 			this.log.error("图片不存在!");
 		}
 	}
-
+	
 }

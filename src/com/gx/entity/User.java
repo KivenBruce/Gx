@@ -7,7 +7,7 @@ public class User {
 	private String Gmail;
 	private String Gtel;
 	private String GcreateTime;
-	// private String Gsex;
+	private String Gsex;
 	private int level;
 	private String Gimage;
 	private String Gtitle;
@@ -89,6 +89,71 @@ public class User {
 	public void setGtitle(String gtitle) {
 		Gtitle = gtitle;
 	}
+	
+	
+	
+	public String getGsex() {
+		return Gsex;
+	}
 
+	public void setGsex(String gsex) {
+		Gsex = gsex;
+	}
+
+	/**
+	 * 
+	 */
+	public User() {
+		super();
+	}
+
+	/**
+	 * @param id
+	 * @param gusername
+	 * @param gpwd
+	 * @param gmail
+	 * @param gtel
+	 * @param gcreateTime
+	 * @param level
+	 * @param gimage
+	 * @param gtitle
+	 */
+	public User(String gusername,String gmail, String gtel,String gsex,int level,String gimage, String gtitle) {
+		super();
+		Gusername = gusername;
+		Gmail = gmail;
+		Gtel = gtel;
+		this.level = level;
+		Gimage = gimage;
+		Gtitle = gtitle;
+		Gsex=gsex;
+	}
+
+	/**
+	 * @param id
+	 * @param gusername
+	 * @param gpwd
+	 * @param gmail
+	 * @param gtel
+	 * @param gcreateTime
+	 * @param level
+	 * @param gimage
+	 * @param gtitle
+	 */
+	public User(int id, String gusername, String gpwd, String gmail, String gtel, String gcreateTime, int level,
+			String gimage, String gtitle) {
+		super();
+		this.id = id;
+		Gusername = gusername;
+		Gpwd = gpwd;
+		Gmail = gmail;
+		Gtel = gtel;
+		GcreateTime = gcreateTime;
+		this.level = level;
+		Gimage = gimage;
+		Gtitle = gtitle;
+	}
+	
+	
 	
 }

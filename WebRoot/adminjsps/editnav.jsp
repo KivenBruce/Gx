@@ -64,12 +64,12 @@
 				<div class="row-fluid">
 					<div class="page-header">
 						<h1>
-							<c:if test="${type=='inlist' }">校内导航活动</c:if>
-							<c:if test="${type=='outlist' }">校外导航活动</c:if>
+							<c:if test="${type=='0'}">校内导航活动</c:if>
+							<c:if test="${type=='1'}">校外导航活动</c:if>
 							<small>更新信息</small>
 						</h1>
 					</div>
-					<form onsubmit="return judge()"
+					<form onsubmit="return judge()" enctype="multipart/form-data"
 						action="<c:url value='/NavServlet?method=editNav&gid=${gid}&type=${type}'/>"
 						method="post">
 
@@ -135,11 +135,12 @@
 			</div>
 		</div>
 		<hr>
-		<div style="bottom: 0; position: fixed; width: 97%">
-			<%@include file="/adminjsps/foot.jsp"%>
-		</div>
+		
 
 	</div>
+	<div style="bottom: 0; position: fixed; width: 100%">
+			<%@include file="/adminjsps/foot.jsp"%>
+		</div>
 	<script type="text/javascript">
 		UEDITOR_CONFIG.UEDITOR_HOME_URL = '../uedit/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息 
 		var editor = UE.getEditor('editor');

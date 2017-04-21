@@ -115,10 +115,11 @@ function judge() {
 
 			<hr>
 
-			<div style="bottom: 0; position: fixed; width: 97%">
-			<%@include file="/adminjsps/foot.jsp"%>
-		</div>
+			
 
+		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
+			<%@include file="/adminjsps/foot.jsp"%>
 		</div>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">

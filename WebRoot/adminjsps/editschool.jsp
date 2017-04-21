@@ -69,7 +69,7 @@
 						</h1>
 					</div>
 
-					<form onsubmit="return judge()"
+					<form onsubmit="return judge()" enctype="multipart/form-data"
 						action="<c:url value='/SchoolServlet?method=editSchool&gid=${school.id }&type=${school.gflag}'/>"
 						method="post">
 						<fieldset>
@@ -132,12 +132,11 @@
 		</div>
 
 		<hr>
-
-		<div style="bottom: 0; position: fixed; width: 97%">
+	</div>
+	<div style="bottom: 0; position: fixed; width: 100%">
 			<%@include file="/adminjsps/foot.jsp"%>
 		</div>
-
-	</div>
+	
 	<script type="text/javascript">
 		UEDITOR_CONFIG.UEDITOR_HOME_URL = '../uedit/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息 
 		var editor = UE.getEditor('editor');

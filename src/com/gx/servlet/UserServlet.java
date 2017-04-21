@@ -1,12 +1,16 @@
 package com.gx.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
@@ -25,6 +33,7 @@ import com.gx.dao.VisitDao;
 import com.gx.entity.Club;
 import com.gx.entity.User;
 import com.gx.entity.Visit;
+import com.gx.pager.ClubConstants;
 import com.gx.pager.PageBean;
 import com.gx.pager.PageConstants;
 import com.gx.utils.DateUtils;
@@ -128,10 +137,10 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String addUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {// 增加新用户,得到的数据,其中涉及到radio,select的不正常.
-		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
-		String gusername = request.getParameter("gusername");
-		if (gusername != null) {
-			String result = userDao.addUser(user);
+		Map<String,String> map = copyImage(request, ClubConstants.USER_IMG_PATH);
+		User user=new User(map.get("gusername"),map.get("gmail"), map.get("gtel"),map.get("gsex"), Integer.parseInt(map.get("level")), map.get("gimage"), map.get("gtitle"));
+		if (map.size()>0) {
+			String result = userDao.addUser(user);	
 			if (result == "noexist") {
 				log.debug("添加新用户成功");
 				return findAll(request, response);
@@ -190,35 +199,103 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String editUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		String gid = request.getParameter("gid");
-		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
-		String defaultimg=request.getParameter("defaultimg");
-		if(user.getGimage()==null||user.getGimage().equals("")){
-			user.setGimage(defaultimg);
+
+		Map<String,String> map = copyImage(request, ClubConstants.USER_IMG_PATH);
+
+		String gid = request.getParameter("gid");	
+		if (map.get("gimage")== null || map.get("gimage").equals("")) {
+			map.put("gimage", map.get("defaultimg"));
 		}
-		String username = request.getParameter("gusername");
+		User user=new User(map.get("gusername"),map.get("gmail"), map.get("gtel"),map.get("gsex"), Integer.parseInt(map.get("level")), map.get("gimage"), map.get("gtitle"));
+		String username = (String) map.get("gusername");
 		User user1 = userDao.findById(gid);
 		if (username != null) {
-			if (user.getGusername().equals(user1.getGusername())) {// 未对用户名进行修改
+			if (map.get("gusername").equals(user1.getGusername())) {// 未对用户名进行修改
 				userDao.editUser(user, gid);
 				log.debug("修改用户成功!");
 				return findAll(request, response);
 			} else {// 已对用户名进行修改
-				if (userDao.exist(user).equals("noexist")) {
+				if (userDao.exist(user).equals("noexist")) {//新用户名
 					userDao.editUser(user, gid);
 					log.debug("修改用户成功!");
-					return findAll(request, response);
+					
 				} else {
-					request.setAttribute("msg", "isexist");
+					request.setAttribute("msg", "该用户名已存在!");
 					request.setAttribute("user", user);
+					request.setAttribute("gid", gid);
 					return "f:/adminjsps/edituser.jsp";
 				}
+				return findAll(request, response);
 			}
 
 		} else {
 			request.setAttribute("msg", "修改用户页面");
 			return "f:/adminjsps/noedit.jsp";
 		}
+	}
+
+	private Map copyImage(HttpServletRequest request, String targetPath) {
+		Map param = new HashMap();
+		if (ServletFileUpload.isMultipartContent(request)) {
+			try {
+				// 1. 创建DiskFileItemFactory对象，设置缓冲区大小和临时文件目录
+				DiskFileItemFactory factory = new DiskFileItemFactory();
+				// 2. 创建ServletFileUpload对象，并设置上传文件的大小限制。
+				ServletFileUpload sfu = new ServletFileUpload(factory);
+				sfu.setSizeMax(10 * 1024 * 1024);// 以byte为单位 不能超过10M
+
+				sfu.setHeaderEncoding("utf-8");
+				// 3.调用ServletFileUpload.parseRequest方法解析request对象，得到一个保存了所有上传内容的List对象。
+				@SuppressWarnings("unchecked")
+				List<FileItem> fileItemList = sfu.parseRequest(request);
+				Iterator<FileItem> fileItems = fileItemList.iterator();
+				// 4. 遍历list，每迭代一个FileItem对象，调用其isFormField方法判断是否是上传文件
+
+				while (fileItems.hasNext()) {
+					FileItem fileItem = fileItems.next();
+					// 普通表单元素
+					if (fileItem.isFormField()) {
+						String name = fileItem.getFieldName();// name属性值
+						String value = fileItem.getString("utf-8");// name对应的value值
+						param.put(fileItem.getFieldName(), fileItem.getString("utf-8"));
+						System.out.println(name + " = " + value);
+					}
+					// <input type="file">的上传文件的元素
+					else {
+						String fileName = fileItem.getName();// 文件名称
+						String gid=request.getParameter("gid");
+						if (!fileName.equals("")) {
+							System.out.println("原文件名：" + fileName);// Koala.jpg
+							String suffix = fileName.substring(fileName.lastIndexOf('.'));
+							System.out.println("扩展名：" + suffix);// .jpg
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+							// 新文件名（唯一）
+							String newFileName;
+							if(gid==null){
+								newFileName = sdf.format(new Date()) + suffix;
+							}else{
+								newFileName = gid+ suffix;
+							}
+							
+							System.out.println("新文件名：" + newFileName);// image\1478509873038.jpg
+							// 5. 调用FileItem的write()方法，写入文件
+							param.put("gimage", newFileName);
+							File file = new File(targetPath + newFileName);
+							System.out.println(file.getAbsolutePath());
+							fileItem.write(file);
+							// 6. 调用FileItem的delete()方法，删除临时文件
+							fileItem.delete();
+
+						}
+					}
+				}
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return param;
 	}
 
 	/**
@@ -232,56 +309,51 @@ public class UserServlet extends BaseServlet {
 	 * @throws SQLException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void editAccount(HttpServletRequest request, HttpServletResponse response)
+	public String editAccount(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
 		HttpSession session = request.getSession();
 		String gid = request.getParameter("gid");
-		String gimage = request.getParameter("gimage");
-		String gusername = request.getParameter("gusername");
-		String gmail = request.getParameter("gmail");
-		String gtel = request.getParameter("gtel");
-		String gtitle = request.getParameter("gtitle");
-		User user = CommonUtils.toBean(request.getParameterMap(), User.class);
-		String sessionlevel=session.getAttribute("level").toString();
-		int level=Integer.parseInt(sessionlevel);
-		user.setLevel(level);// 普通用户等级
-		String info = "success";
-		JSONObject jo = new JSONObject();
 		User user1 = userDao.findById(gid);
-		if (user.getGpwd() == null) {// 进入更新用户信息操作
-			if (user.getGimage() == null || user.getGimage().equals("")) {// 未更换头像,使用原来的头像
-				user.setGimage(user1.getGimage());
+		Map<String,String> map = copyImage(request, ClubConstants.USER_IMG_PATH);
+		if(map.size()>0){
+			if (map.get("gimage")== null || map.get("gimage").equals("")) {// 未更换头像,使用原来的头像
+				map.put("gimage", map.get("defaultimg"));
 			}
-			if (user.getGusername().equals(user1.getGusername())) {// 未对用户名进行修改.不修改用户名也算是修改,也可以修改其他的
-				userDao.editUser(user, gid);
-				log.debug("修改用户信息成功!");
-			} else {// 已对用户名进行修改
-				if (userDao.exist(user).equals("noexist")) {// 新用户名
+			if(map.get("level")==null){
+				map.put("level",session.getAttribute("level").toString());
+			}
+			User user=new User(map.get("gusername"),map.get("gmail"), map.get("gtel"), map.get("gsex"),Integer.parseInt(map.get("level")), map.get("gimage"), map.get("gtitle"));			
+			if (user.getGpwd() == null) {// 进入更新用户信息操作			
+				if (user.getGusername().equals(user1.getGusername())) {// 未对用户名进行修改.不修改用户名也算是修改,也可以修改其他的
 					userDao.editUser(user, gid);
 					log.debug("修改用户信息成功!");
-					session.setAttribute("name", user.getGusername());
-					info = "修改用户信息成功";
-				} else {// 用户名已存在
-					log.debug("该用户名已存在,修改用户信息失败!!!");
-					info = "保存失败,该用户名已存在!";
+				} else {// 已对用户名进行修改
+					if (userDao.exist(user).equals("noexist")) {// 新用户名
+						userDao.editUser(user, gid);
+						log.debug("修改用户信息成功!");
+						session.setAttribute("name", user.getGusername());				
+					} else {// 用户名已存在
+						log.debug("该用户名已存在,修改用户信息失败!!!");	
+						request.setAttribute("error", "该用户名已存在!用户名修改失败");
+					}
 				}
-			}
-		} else {// 进入更改密码操作
-			if (user.getGpwd() != null && user.getGpwd().length() > 0) {
-				String pwd = user.getGpwd();
-				MessageDigest md5 = MessageDigest.getInstance("MD5");
-				BASE64Encoder base64en = new BASE64Encoder();
-				String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
-				userDao.resetPass(gid, passEncode);
-				session.setAttribute("pwd", pwd);
-				log.debug("修改用户密码成功!");
-				info = "修改用户密码成功";
-			}
+			} else {// 进入更改密码操作
+				if (user.getGpwd() != null && user.getGpwd().length() > 0) {
+					String pwd = user.getGpwd();
+					MessageDigest md5 = MessageDigest.getInstance("MD5");
+					BASE64Encoder base64en = new BASE64Encoder();
+					String passEncode = base64en.encode(md5.digest(pwd.getBytes("utf-8")));
+					userDao.resetPass(gid, passEncode);
+					session.setAttribute("pwd", pwd);
+					log.debug("修改用户密码成功!");
+				}
 
+			}
+			return reloadAccount(request,response);
+		}else {
+			return reloadAccount(request,response);
 		}
-		jo.put("userimage", user.getGimage());
-		jo.put("info", info);
-		response.getWriter().write(jo.toString());
+		
 	}
 
 	/**

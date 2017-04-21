@@ -122,9 +122,9 @@ public class UserDao {
 		String exist = exist(user);
 		if (exist.equals("noexist")) {
 			flag = "noexist";
-			String sql = "insert into guser(Gusername, Gpwd,level, Gmail, Gtel) values(?,?,?,?,?)";
+			String sql = "insert into guser(Gusername, Gpwd,level, Gmail, Gtel,Gimage,Gtitle,Gsex) values(?,?,?,?,?,?,?,?)";
 			Object[] params = { user.getGusername(), PageConstants.INITAL_PASSWORD, Integer.valueOf(user.getLevel()),
-					user.getGmail(), user.getGtel() };
+					user.getGmail(), user.getGtel(),user.getGimage(),user.getGtitle(),user.getGsex() };
 			try {
 				this.qr.update(sql, params);
 			} catch (SQLException e) {
@@ -166,9 +166,9 @@ public class UserDao {
 	}
 
 	public void editUser(User user, String gid) throws SQLException {
-		String sql = "update guser set Gusername=?,level=?, Gmail=?, Gtel=? ,Gimage=?,Gtitle=? where id=?";
+		String sql = "update guser set Gusername=?,level=?, Gmail=?, Gtel=?,Gsex=? ,Gimage=?,Gtitle=? where id=?";
 		try {
-			qr.update(sql, user.getGusername(), user.getLevel(), user.getGmail(), user.getGtel(), user.getGimage(),
+			qr.update(sql, user.getGusername(), user.getLevel(), user.getGmail(), user.getGtel(),user.getGsex(), user.getGimage(),
 					user.getGtitle(), gid);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

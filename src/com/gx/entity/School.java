@@ -164,5 +164,19 @@ public class School
     this.Gremain = gremain;
   }
   
+  public School(String gtheme, String gpart, String gtime, String gcontent, String gusername, int gperson, String gprice, String gplace, String gtupian, String gremain)
+  {
+    this.Gtheme = gtheme;
+    this.Gpart = gpart;
+    this.Gtime = gtime;
+    this.Gcontent = gcontent;
+    this.Gusername = gusername;
+    this.Gperson = gperson;
+    this.Gprice = gprice;
+    this.Gplace = gplace;
+    this.Gtupian = gtupian;
+    this.Gremain = gremain;
+  }
+  
   public School() {}
 }

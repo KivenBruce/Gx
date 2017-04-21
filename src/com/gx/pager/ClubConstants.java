@@ -10,10 +10,12 @@ public class ClubConstants {
 	public static final int SPORT_ID=2;//运动类
 	public static final int INTERNET_ID=3;//互联网类
 	//图片读取路径
-	public static final String GAME_PATH="E:\\Image\\club\\game\\";
-	public static final String SPORT_PATH="E:\\Image\\club\\sport\\";
-	public static final String INTERNET_PATH="E:\\Image\\club\\internet\\";
-	public static final String USER_IMG_PATH="E:\\Image\\club\\userimg\\";
+	public static final String GAME_PATH="E:/Image/club/game/";
+	public static final String SPORT_PATH="E:/Image/club/sport/";
+	public static final String INTERNET_PATH="E:/Image/club/internet/";
+	public static final String USER_IMG_PATH="E:/Image/club/userimg/";//用户图片
+	public static final String ACTIVE_IMG_PATH="E:/Image/active/";//活动图片
+	public static final String NAV_IMG_PATH="E:/Image/nav/";//导航图片
 	public static final int COMMENT_PAGE_SIZE = 6;//评论每页记录数
 
 }

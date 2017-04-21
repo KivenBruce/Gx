@@ -33,10 +33,9 @@
 	font-size: 12px;
 }
 
-
 .divv {
-	 font-size: 20px;
-    padding-top: 15px;
+	font-size: 20px;
+	padding-top: 15px;
 }
 
 .divv input {
@@ -69,7 +68,7 @@
 								<div class="divv">
 									<span> 用户名 :<input type="text" id="gusername"
 										name="gusername" value="${user.gusername }" />
-									</span> <span id="egname"></span>
+									</span> <span id="egname"></span><span style="color:#FF0033">${msg }</span>
 								</div>
 								<div class="divv">
 									<span> 邮&nbsp&nbsp&nbsp&nbsp&nbsp箱:<input type="text"
@@ -84,23 +83,28 @@
 								<div class="divv">
 									<span> 头&nbsp&nbsp&nbsp&nbsp&nbsp像:<input type="file"
 										id="gimage" name="gimage" value="${user.gimage }" />
-									</span>
-									<span style="margin-left:-70px"> 默认:${user.gimage }
-									</span><input type="hidden" id="defaultimg" name="defaultimg" value="${user.gimage }" />
+									</span> <span style="margin-left: -70px"> 默认:${user.gimage } </span><input
+										type="hidden" id="defaultimg" name="defaultimg"
+										value="${user.gimage }" />
 								</div>
 								<div class="divv">
-									<span> 签&nbsp&nbsp&nbsp&nbsp&nbsp名:<input type="text" maxlength="13"
-										id="gtitle" name="gtitle" value="${user.gtitle }" />
+									<span> 签&nbsp&nbsp&nbsp&nbsp&nbsp名:<input type="text"
+										maxlength="13" id="gtitle" name="gtitle"
+										value="${user.gtitle }" />
 									</span> <span id="etitle"></span>
 								</div>
 								<div class="divv">
-									<span>级 &nbsp&nbsp&nbsp&nbsp&nbsp别:										
-											<select id="level" name="level" style="width: 250px;">
-												<option value="1">管理员</option>
-												<option value="2">高级会员</option>
-												<option value="3" selected>普通会员</option>
-											</select>										
+									<span>级 &nbsp&nbsp&nbsp&nbsp&nbsp别: <select id="level"
+										name="level" style="width: 100px;">
+											<option value="1">管理员</option>
+											<option value="2">高级会员</option>
+											<option value="3" selected>普通会员</option>
+									</select>
 									</span>
+									<span style="margin-left: 20px">性别:<input type="radio" name="gsex" id="gsex" class="input-xlarge" style="width: 30px"
+										<c:if test="${user.gsex eq '男' }">checked</c:if> value="男" />男 <input type="radio" name="gsex" style="width: 30px"
+										id="gsex" class="input-xlarge" <c:if test="${user.gsex eq '女' }">checked</c:if>
+										value="女" />女</span>
 								</div>
 								<div class="form-actions">
 									<input type="submit" class="btn btn-success btn-large"
@@ -114,8 +118,9 @@
 				</div>
 			</div>
 			<hr>
+		</div>
+		<div style="bottom: 0; position: fixed; width: 100%">
 			<%@include file="/adminjsps/foot.jsp"%>
-
 		</div>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">

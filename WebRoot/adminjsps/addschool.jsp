@@ -5,7 +5,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/adminjsps/";
-	String type = request.getParameter("type");
+	String type= request.getParameter("type");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -55,10 +55,14 @@
 					<div class="row-fluid">
 						<div class="page-header">
 							<h1>
-								校内活动 <small>新增信息</small>
+							<c:if test="<%= type.equals(\"0\")%>">校内活动</c:if>
+							<c:if test="<%= type.equals(\"1\")%>">校外活动</c:if>
+							<c:if test="<%= type.equals(\"2\")%>">校内推荐活动</c:if>
+							<c:if test="<%= type.equals(\"3\")%>">校外推荐活动</c:if>
+							<small>新增信息</small>
 							</h1>
 						</div>
-						<form onsubmit="return judge()"
+						<form onsubmit="return judge()"  enctype="multipart/form-data"
 							action="<c:url value='/SchoolServlet?method=addSchool&type=<%=type%>'/>"
 							method="post">
 

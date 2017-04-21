@@ -76,10 +76,10 @@ function showul(e){
 						<div class="page-header">
 							<h1>
 								导航活动
-								<c:if test="${type=='inlist'}">
+								<c:if test="${type=='0'}">
 									<small>校内导航</small>
 								</c:if>
-								<c:if test="${type=='outlist'}">
+								<c:if test="${type=='1'}">
 									<small>校外导航</small>
 								</c:if>
 							</h1>

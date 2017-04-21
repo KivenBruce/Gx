@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import com.gx.dao.FrontDao;
 import com.gx.entity.Navigate;
 import com.gx.entity.School;
+import com.gx.pager.ClubConstants;
 import com.gx.pager.PageBean;
 
 import cn.itcast.servlet.BaseServlet;
@@ -148,7 +149,7 @@ public class FrontServlet extends BaseServlet{
 		response.setContentType("application/octet-stream;charset=UTF-8");
 		String file = request.getParameter("filepath");
 		if (!file.isEmpty()) {
-			String target = "E:\\Image\\nav\\" + file;
+			String target = ClubConstants.NAV_IMG_PATH + file;
 			FileInputStream in = new FileInputStream(target);
 			try {
 				int i = in.available();
@@ -178,7 +179,7 @@ public class FrontServlet extends BaseServlet{
 		response.setContentType("application/octet-stream;charset=UTF-8");
 		String file = request.getParameter("filepath");
 		if (!file.isEmpty()) {
-			String target = "E:\\Image\\hzx\\" + file;
+			String target = ClubConstants.ACTIVE_IMG_PATH + file;
 			FileInputStream in = new FileInputStream(target);
 			try {
 				int i = in.available();

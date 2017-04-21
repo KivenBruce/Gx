@@ -1,39 +1,39 @@
-﻿$(function(){//取消与关注
-	$(".notice").click(function(){
+﻿$(function() {// 取消与关注
+	$(".notice").click(function() {
 		$(this).parent().parent().parent().hide();
 		var userid = $(this).parent().children("input").eq(0).val();
 		var clubid = $(this).parent().children("input").eq(1).val();
 		$.ajax({
-			url:'/Gx/ClubServlet?method=focus',
-			data:{
-				"value":"1",
-				"clubid":clubid,
-				"userid":userid
+			url : '/Gx/ClubServlet?method=focus',
+			data : {
+				"value" : "1",
+				"clubid" : clubid,
+				"userid" : userid
 			},
-			type:'post',
-			dataType:'json',
-			success:function(data){
+			type : 'post',
+			dataType : 'json',
+			success : function(data) {
 				$("#focuscount").text(data.userclubcount);
 			},
-			error:function(){
+			error : function() {
 				alert("操作失败,请稍后重试!");
 			}
 		});
 	});
 });
-	$(function() {//点击显示相应的页面
-		for (var i = 1; i <= 3; i++) {
-			(function(arg) {
-				$("#i" + i).click(function(i) {
-					$(".content-menu li").attr("class", "menu menu-item");
-					$(this).attr("class", "menu menu-item active");
-					$(".ui-user-item").hide();
-					$("#q" + arg).show();
-				});
-			})(i);
+$(function() {// 点击显示相应的页面
+	for (var i = 1; i <= 3; i++) {
+		(function(arg) {
+			$("#i" + i).click(function(i) {
+				$(".content-menu li").attr("class", "menu menu-item");
+				$(this).attr("class", "menu menu-item active");
+				$(".ui-user-item").hide();
+				$("#q" + arg).show();
+			});
+		})(i);
 
-		}
-	});
+	}
+});
 
 $(document)
 		.ready(
@@ -54,7 +54,7 @@ $(document)
 										if (u == "") {
 											var error = true;
 											document.getElementById("egname").innerHTML = "<span style='padding-left:22px;color:#FF0033'> **请填写用户名！</span>";
-											$("#egname").show().delay(2000)
+											$("#egname").show().delay(3000)
 													.hide(0);
 
 										}
@@ -82,20 +82,19 @@ $(document)
 										} else {
 											$('#tel_error').fadeOut(500);
 										}
-										if (error == false) {//验证全部通过
-											if (typeof (level) == "undefined") {//普通用户模式下修改,不包括修改级别
-												$.ajax({
+										if (error == false) {// 验证全部通过
+											/*if (typeof (level) == "undefined") {// 普通用户模式下修改,不包括修改级别
+												$
+														.ajax({
 															type : "POST",
-															dataType : "json",
+															
 															url : '/Gx/UserServlet?method=editAccount&gid='
 																	+ gid,
-															data : {
-																"gusername" : gusername,
-																"gmail" : email,
-																"gtel" : tel,
-																"gimage" : gimage,
-																"gtitle" : gtitle
-															},// 你的formid
+															cache : false,
+															processData : false,
+															contentType : false,
+															data : new FormData(
+																	$('#userform')),
 															async : false,
 															error : function(
 																	request) {
@@ -115,8 +114,8 @@ $(document)
 																						+ data.userimage);
 															}
 														});
-											}
-
+											}*/
+											return true;
 										} else {
 											return false;
 										}

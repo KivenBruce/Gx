@@ -8,6 +8,8 @@
 	response.setHeader("Content-Type" , "text/html");
 	
 	String rootPath = application.getRealPath( "/" );
+	//String rootPath="D:\\xiaoyuan\\WebRoot\\uploadImage\\";
+	//String rootPath="E:\\MyStation\\uploadImage\\";
 	System.out.println(rootPath);
 	out.write( new ActionEnter( request, rootPath ).exec() );
 	

@@ -346,6 +346,14 @@
 	<script type="text/javascript">
 		UEDITOR_CONFIG.UEDITOR_HOME_URL = './uedit/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息 
 		var editor = UE.getEditor('editor');
+	/*  UE.Editor.prototype._bkGetActionUrl=UE.Editor.prototype.getActionUrl;
+        UE.Editor.prototype.getActionUrl=function(action){
+            if (action == 'uploadimage'){
+                return '/Gx/ClubServlet?method=saveImage';    这里填上你自己的上传图片的action 
+            }else{
+                return this._bkGetActionUrl.call(this, action);
+            }
+        };  */ 
 	</script>
 </body>
 </html>

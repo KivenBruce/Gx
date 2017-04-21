@@ -111,10 +111,10 @@ public class SchoolDao {
 	}
 
 	public void addSchool(School school) {
-		String sql = "insert into sch_active(Gtheme,Gpart,Gtime,Gcontent,Gusername,Gperson,Gremain,Gtupian,Gprice,Gplace)values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sch_active(Gtheme,Gpart,Gtime,Gcontent,Gusername,Gperson,Gremain,Gtupian,Gprice,Gplace,Gflag)values(?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] params = { school.getGtheme(), school.getGpart(), school.getGtime(), school.getGcontent(),
 				school.getGusername(), Integer.valueOf(school.getGperson()), school.getGremain(), school.getGtupian(),
-				school.getGprice(), school.getGplace() };
+				school.getGprice(), school.getGplace(),school.getGflag() };
 		try {
 			this.qr.update(sql, params);
 		} catch (SQLException e) {
