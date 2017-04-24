@@ -114,7 +114,7 @@
 										<td>${school.gpart }</td>
 										<td>${school.gtime }</td>
 										<c:if test="${fn:length(school.gcontent) > 4}">
-											<td onclick="showDetail(this)" style="cursor: pointer;">${fn:substring(school.gcontent,0,4)}...</td>
+											<td onclick="showDetail(this)" style="cursor: pointer;">${fn:substring(school.gcontent,0,8)}...</td>
 										</c:if>
 										<c:if test="${fn:length(school.gcontent) <= 4}">
 											<td onclick="showDetail(this)" style="cursor: pointer;">${school.gcontent }</td>

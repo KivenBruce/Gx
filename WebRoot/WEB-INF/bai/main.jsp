@@ -124,7 +124,7 @@
 							</div>
 						</div>
 						<div class="spacer-single"></div>
-						<a href="#" class="btn btn-border btn-big">开始 Crazy</a>
+						<!-- <a href="#" class="btn btn-border btn-big">开始 Crazy</a> -->
 					</div>
 				</div>
 				<div class="de-video-overlay"></div>

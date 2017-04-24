@@ -13,10 +13,6 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <title>Cubic-活动编辑</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-	content="Admin panel developed with the Bootstrap from Twitter.">
-<meta name="author" content="travis">
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://localhost:8080/Gx/logo.ico" />
 <script src="../adminjsps/My97DatePicker/WdatePicker.js"></script>

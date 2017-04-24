@@ -168,7 +168,7 @@ display: none;
 											</c:if>
 										</c:forEach>
 
-										<p>${item.club_desc}</p>
+										<span>${item.club_desc}</span>
 										<a id="t::-${item.club_id}" href="javascript:;"
 											class="follow meta-item zg-follow"><i
 											class="z-icon-follow"></i> <c:if

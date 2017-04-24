@@ -32,10 +32,7 @@
 					<div class="wells hero-unit">
 						<h1>
 							Welcome,<%=session.getAttribute("name")%></h1>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-							Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy
-							auctor massa. Pellentesque habitant morbi tristique senectus et
-							netus et malesuada fames ac turpis egestas.</p>
+						<p>本平台的设计是面向高校大学生校园内交友，学习、生活经验的交流而设计的信息交流平台，更快捷，更安全、更简单。</p>
 						<p>
 							<a class="btn btn-success btn-large" href="adduser.jsp">添加用户
 								&raquo;</a>

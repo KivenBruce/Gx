@@ -106,5 +106,38 @@ public class Club {
 		this.club_hoster = club_hoster;
 	}
 	
+	public Club() {
+	}
+
+	public Club(String club_name, int club_id, int gflag, String club_parent,int parent_id, String club_image,
+			String club_desc, String club_hoster) {
+		super();
+		this.club_name = club_name;
+		this.club_id = club_id;
+		this.gflag = gflag;
+		this.club_parent = club_parent;
+		this.parent_id=parent_id;
+		this.club_image = club_image;
+		this.club_desc = club_desc;
+		this.club_hoster = club_hoster;
+	}
+
+	public Club(int id, String club_name, int club_id, int user_id, int isfocus, int gflag, String club_parent,
+			int parent_id, String club_image, String club_desc, String club_hoster) {
+		super();
+		this.id = id;
+		this.club_name = club_name;
+		this.club_id = club_id;
+		this.user_id = user_id;
+		this.isfocus = isfocus;
+		this.gflag = gflag;
+		this.club_parent = club_parent;
+		this.parent_id = parent_id;
+		this.club_image = club_image;
+		this.club_desc = club_desc;
+		this.club_hoster = club_hoster;
+	}
+	
+	
 	
 }

@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -65,6 +66,13 @@
 		}
 		$('body').load(
 				"/Gx/FrontServlet?method=moreActive&curPage=" + jumppage+ "&type=${type}");
+	}
+	
+	function changeNum(e){
+		var num=$("#"+e).text();
+		alert(num);
+		var newnum=Number(num)+1;
+		$("#"+e).text(newnum);
 	}
 </script>
 </head>
@@ -134,13 +142,13 @@
 										<td rowspan="4"><img alt="图标"
 											src="FrontServlet?method=doImage&filepath=${item.gtupian}"
 											style="width: 80px; height: 80px; padding: 0px 10px;" /></td>
-										<td><span style="font-size: 16px;"> <a
+										<td><span style="font-size: 16px;"> <a onclick="changeNum('${item.id}')"
 												href="FrontServlet?method=navDetail&gid=${item.id}&type=${type}"
 												target="_blank"> ${ item.gtheme} </a>
 										</span></td>
 									</tr>
 									<tr>
-										<td><span style="font-size: 14px; color: gray;">时间：${ item.gtime }</span>
+										<td><span style="font-size: 14px; color: gray;">时间：${fn:substring(item.gtime,0,16)}</span>
 										</td>
 									</tr>
 									<tr>
@@ -172,7 +180,10 @@
 											</c:if>
 										</tr>
 										<tr>
-											<td>已浏览: ${item.gvisits}</td>
+											<td>已浏览: <span  id="${item.id}">${item.gvisits}</span></td>
+										</tr>
+										<tr>
+											<td>举办单位: ${item.gpart}</td>
 										</tr>
 									</table>
 							</div>

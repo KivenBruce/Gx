@@ -24,9 +24,9 @@
 			<li class="nav-header"><i class="fa fa-map-marker"></i> 网站导航</li>
 			<li><a href="<c:url value='/NavServlet?method=findAll&type=0'/>">校内导航</a></li>
 			<li><a href="<c:url value='/NavServlet?method=findAll&type=1'/>">校外导航</a></li>
-			<%-- <li class="nav-header"><i class="fa fa-paper-plane"></i> 外观管理</li>
-			<li><a href="<c:url value='/OutServlet?method=findAll'/>">首页</a></li>
-			<li><a href="<c:url value='/ThemeServlet?method=findAll'/>">主题</a></li> --%>
+			<li class="nav-header"><i class="fa fa-paper-plane"></i> Club</li>
+			<li><a href="<c:url value='/ClubServlet?method=findByAdmin'/>">Club管理</a></li>
+			<%-- <li><a href="<c:url value='/ClubServlet?method=addClub'/>">新增Club</a></li> --%>
 		</ul>
 	</div>
 </div>

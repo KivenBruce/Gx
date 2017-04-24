@@ -9,13 +9,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Cubic - One Page Responsive HTML 5 Website Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Responsive Minimal Bootstrap Theme">
-<meta name="keywords"
-	content="onepage,responsive,minimal,bootstrap,theme">
-<meta name="author" content="">
-
+<title>Cubic - 首页</title>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="css/jpreloader.css" type="text/css">
 <link rel="stylesheet" href="css/animate.css" type="text/css">
@@ -88,7 +82,7 @@
 							</div>
 						</div>
 						<div class="spacer-single"></div>
-						<a href="#" class="btn btn-border btn-big">开始 Crazy</a>
+						<!-- <a href="#" class="btn btn-border btn-big">开始 Crazy</a> -->
 					</div>
 				</div>
 				<div class="de-video-overlay"></div>
@@ -113,12 +107,4 @@
 	<script src="js/classie.js"></script>
 	<script src="js/designesia.js"></script>
 </body>
-<script type="text/javascript">
-$(function(){
-	$("a").click(function(){
-		$("a").removeClass("active");
-		$(this).addClass("active");
-	});
-})
-</script>
 </html>

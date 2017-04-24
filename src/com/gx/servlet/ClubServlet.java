@@ -4,8 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +31,7 @@ import com.gx.dao.CommentDao;
 import com.gx.dao.UserDao;
 import com.gx.entity.Club;
 import com.gx.entity.Comment;
+import com.gx.entity.School;
 import com.gx.entity.User;
 import com.gx.pager.ClubConstants;
 import com.gx.pager.PageBean;
@@ -216,6 +217,15 @@ public class ClubServlet extends BaseServlet {
 		response.getWriter().write(jo.toString());
 	}
 
+	/**
+	 * 增加评论
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws SQLException
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public String addComment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		Comment comment = CommonUtils.toBean(request.getParameterMap(), Comment.class);
@@ -226,6 +236,120 @@ public class ClubServlet extends BaseServlet {
 		return clubDetail(request, response);
 	}
 
+	/**
+	 * 管理员管理club
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public String findByAdmin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		String question = request.getParameter("question");
+		String curPage = request.getParameter("curPage");
+		if (question != null) {
+			question = URLDecoder.decode(question, "utf8");
+		}
+		PageBean<Club> pb = (PageBean<Club>) clubDao.findByAdmin(question, curPage);
+		request.setAttribute("pb", pb);
+		request.setAttribute("curPage", pb.getPc());
+		request.setAttribute("question", question);
+		return "f:/adminjsps/adminclub.jsp";
+	}
+
+	/**
+	 * 进入编辑
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public String reload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		String gid = request.getParameter("gid");
+		Club club = clubDao.findById(gid);
+		List<Map<String, Object>> findClubParent = clubDao.findClubParent();
+		Map<Object, Object> mapcount = new HashMap<>();
+		for (Map<String, Object> map : findClubParent) {
+			mapcount.put(map.get("parent_id"), map.get("club_parent"));
+		}
+		request.setAttribute("club", club);
+		request.setAttribute("mapcount", mapcount);
+		request.setAttribute("gid", gid);
+		request.setAttribute("type", club.getGflag());
+		return "f:/adminjsps/editclub.jsp";
+	}
+
+	/**
+	 * 修改Club信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 * @throws SQLException
+	 */
+	public String editClub(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		String gid = request.getParameter("gid");
+		Club club1 = clubDao.findById(gid);
+		String targetPath = null;
+		Map<String, String> map = copyImage(request, targetPath);
+		if (map.get("gimage") == null || map.get("gimage").equals("")) {
+			map.put("gimage", map.get("defaultimg"));
+		}
+		Club club = new Club(map.get("club_name"), Integer.parseInt(map.get("club_id")),
+				Integer.parseInt(map.get("gflag")), map.get("gparent"), Integer.parseInt(map.get("parent_id")),map.get("gimage"), map.get("editorValue"),
+				map.get("club_hoster"));
+		if (map.size() > 0) {
+			if (map.get("club_name").equals(club1.getClub_name())) {// 未对用户名进行修改
+				clubDao.editClub(club, gid);
+				log.debug("修改club成功!");
+				return findByAdmin(request, response);
+			} else {// 已对用户名进行修改
+				if (clubDao.exist(club).equals("noexist")) {// 新clubname
+					clubDao.editClub(club, gid);
+					log.debug("修改club成功!");
+					return findByAdmin(request, response);
+				} else {
+					request.setAttribute("msg", "该Club名称已存在!");
+					request.setAttribute("club", club1);
+					request.setAttribute("gid", gid);
+					return "f:/adminjsps/editclub.jsp";
+				}
+
+			}
+
+		} else {
+			request.setAttribute("msg", "修改CLUB页面");
+			return "f:/adminjsps/noedit.jsp";
+		}
+	}
+
+	/**
+	 * 删除Club信息
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 * @throws SQLException
+	 */
+	public String deleteClub(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		String gid = request.getParameter("gid");
+		clubDao.deleteClub(gid);
+		log.debug("删除club成功!");
+		return findByAdmin(request, response);
+	}
 	
 	/**
 	 * 处理图片方法
@@ -273,5 +397,75 @@ public class ClubServlet extends BaseServlet {
 			this.log.error("图片不存在!");
 		}
 	}
-	
+
+	/**
+	 * 复制图片
+	 * 
+	 * @param request
+	 * @param targetPath
+	 * @return
+	 */
+	private Map copyImage(HttpServletRequest request, String targetPath) {
+		Map param = new HashMap();
+		if (ServletFileUpload.isMultipartContent(request)) {
+			try {
+				DiskFileItemFactory factory = new DiskFileItemFactory();
+				ServletFileUpload sfu = new ServletFileUpload(factory);
+				sfu.setSizeMax(10 * 1024 * 1024);// 以byte为单位 不能超过10M
+				sfu.setHeaderEncoding("utf-8");
+				@SuppressWarnings("unchecked")
+				List<FileItem> fileItemList = sfu.parseRequest(request);
+				Iterator<FileItem> fileItems = fileItemList.iterator();
+				while (fileItems.hasNext()) {
+					FileItem fileItem = fileItems.next();
+					if (fileItem.isFormField()) {
+						String name = fileItem.getFieldName();// name属性值
+						String value = fileItem.getString("utf-8");// name对应的value值
+						if (name.equals("gparent")) {
+							if (value.equals("游戏")) {
+								targetPath = ClubConstants.GAME_PATH;
+								param.put("parent_id", "1");
+							} else if (value.equals("运动")) {
+								targetPath = ClubConstants.SPORT_PATH;
+								param.put("parent_id", "2");
+							} else {
+								targetPath = ClubConstants.INTERNET_PATH;
+								param.put("parent_id", "3");
+							}
+						}
+						param.put(fileItem.getFieldName(), fileItem.getString("utf-8"));
+						System.out.println(name + " = " + value);
+					} else {
+						String fileName = fileItem.getName();// 文件名称
+						String gid = request.getParameter("gid");
+						if (!fileName.equals("")) {
+							System.out.println("原文件名：" + fileName);// Koala.jpg
+							String suffix = fileName.substring(fileName.lastIndexOf('.'));
+							System.out.println("扩展名：" + suffix);// .jpg
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+							String newFileName;
+							if (gid == null) {
+								newFileName = sdf.format(new Date()) + suffix;
+							} else {
+								newFileName = gid + suffix;
+							}
+							System.out.println("新文件名：" + newFileName);
+							param.put("gimage", newFileName);
+							File file = new File(targetPath + newFileName);
+							System.out.println(file.getAbsolutePath());
+							fileItem.write(file);
+							fileItem.delete();
+
+						}
+					}
+				}
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return param;
+	}
+
 }
