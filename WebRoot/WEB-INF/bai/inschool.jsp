@@ -67,6 +67,12 @@
 		});
 	});
 </script>
+<style type="text/css">
+.team-pic1 img:hover {
+	cursor:pointer;
+	transform: scale(1.1);
+}
+</style>
 </head>
 <body id="homepage">
 	<div id="wrapper">
@@ -226,23 +232,30 @@
 					<!-- team member -->
 					<c:forEach var="item" items="${newbeanList }" varStatus="status">
 						<c:if test="${status.index<4 }">
-							<div class="de-team-list col-md-3 animated"
-								data-animation="fadeInUp" data-delay="0">
-								<div class="team-pic">
-									<img src="FrontServlet?method=doImage&filepath=${item.gtupian}"
-										alt="" height="263" width="263" />
-								</div>
-								<div class="team-desc col-md-12">
+							<div
+								style="float: left; width: 25%; padding-left: 15px; padding-right: 15px;">
+								<div class="team-pic1">
 									<a target="_blank"
-										href="FrontServlet?method=navDetail&gid=${item.id}&type=outschool"><h3>${item.gtheme}</h3></a>
-									<p class="lead">${item.gpart }</p>
-									<div class="small-border"></div>
-									<p>${item.gcontent }</p>
-									<div class="social">
-										<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a
-											href="#"><i class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-											class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-											class="fa fa-skype fa-lg"></i></a>
+										href="FrontServlet?method=navDetail&gid=${item.id}&type=inschool"><img src="FrontServlet?method=doImage&filepath=${item.gtupian}"
+										alt="" height="203" width="263" /></a>
+								</div>
+								<div style="margin-top: 15px; border: 1px solid #DBEAF9">
+									<div>
+										<img alt="insititution" src="/Gx/institution.png" title="举办单位">
+										<span style="margin-left: 15px">${item.gpart }</span> <i
+											class="approve_icon icon_" title="part"></i> </a>
+									</div>
+									<div>
+										<img
+											title="活动主题" alt="theme" src="/Gx/images/theme.png"> <span
+											style="font-size: 20px; color: #1F1F1F">${item.gtheme}</span>									
+									</div>
+									<div>
+										<span> <i class="fa fa-clock-o"
+											style="line-height: 25px;margin-left: 18px;"></i> <span>${fn:substring(item.gtime,0,10)}</span>
+										</span> <span style="margin-left: 105px"> <span class="">${item.gvisits}
+												浏览</span>
+										</span>
 									</div>
 								</div>
 							</div>
@@ -270,25 +283,30 @@
 					<!-- team member -->
 					<c:forEach var="item" items="${tuibeanList }" varStatus="status">
 						<c:if test="${status.index<4 }">
-							<div class="de-team-list col-md-3 animated"
-								data-animation="fadeInUp" data-delay="0">
-								<div class="team-pic">
-									<img
-										src="FrontServlet?method=doImage&filepath=${item.gtupian }"
-										alt="" height="263" width="263" />
-								</div>
-								<div class="team-desc col-md-12">
+							<div
+								style="float: left; width: 25%; padding-left: 15px; padding-right: 15px;">
+								<div class="team-pic1">
 									<a target="_blank"
-										href="FrontServlet?method=navDetail&gid=${item.id }&type=outtuijian"><h3>${item.gtheme}</h3></a>
-									<p class="lead">${item.gpart }</p>
-									<div class="small-border"></div>
-									<p>${item.gcontent }</p>
-
-									<div class="social">
-										<a href="#"><i class="fa fa-facebook fa-lg"></i></a> <a
-											href="#"><i class="fa fa-twitter fa-lg"></i></a> <a href="#"><i
-											class="fa fa-google-plus fa-lg"></i></a> <a href="#"><i
-											class="fa fa-skype fa-lg"></i></a>
+										href="FrontServlet?method=navDetail&gid=${item.id}&type=inschool"><img src="FrontServlet?method=doImage&filepath=${item.gtupian}"
+										alt="" height="203" width="263" /></a>
+								</div>
+								<div style="margin-top: 15px; border: 1px solid #DBEAF9">
+									<div>
+										<img alt="insititution" src="/Gx/institution.png" title="举办单位">
+										<span style="margin-left: 15px">${item.gpart }</span> <i
+											class="approve_icon icon_" title="part"></i> </a>
+									</div>
+									<div>
+										<img
+											title="活动主题" alt="theme" src="/Gx/images/theme.png"> <span
+											style="font-size: 20px; color: #1F1F1F">${item.gtheme}</span>									
+									</div>
+									<div>
+										<span> <i class="fa fa-clock-o"
+											style="line-height: 25px;margin-left: 18px;"></i> <span>${fn:substring(item.gtime,0,10)}</span>
+										</span> <span style="margin-left: 105px"> <span class="">${item.gvisits}
+												浏览</span>
+										</span>
 									</div>
 								</div>
 							</div>
@@ -302,7 +320,7 @@
 			</div>
 		</section>
 		<!-- section close -->
-			<%@include file="/adminjsps/foot.jsp"%>
+		<%@include file="/adminjsps/foot.jsp"%>
 	</div>
 	</div>
 </body>

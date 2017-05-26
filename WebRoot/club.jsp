@@ -61,7 +61,7 @@ display: none;
 				<form class="search-form">
 					<input type="text" class="search-input" id="question"
 						autocomplete="off" value="" maxlength="100"
-						placeholder="搜索你感兴趣的内容...">
+						placeholder="搜索你感兴趣的club...">
 					<button id="search" onclick="searchclub()" class="club-button"
 						type="submit"></button>
 				</form>

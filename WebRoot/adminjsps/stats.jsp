@@ -70,23 +70,42 @@
 							x : 'center',
 							//paddingLeft: 5, 
 							textStyle : {
-								fontWeight : 'normal',
+								fontWeight : 'bolder',
 								fontFamily : '楷体'
 							}
 						},
 						toolbox : {
 							show : true,
+							/* orient:'vertical',纵向显示 */
+							/* backgroundColor:'#A1334A',显示背景颜色 */
 							feature : {
 								mark : {
-									show : true
+									show : true,
+									/*  title : {
+								            mark : '辅助线开关',
+								            markUndo : '删除辅助线',
+								            markClear : '清空辅助线'
+								        },
+								        lineStyle : {
+								            width : 2,
+								            color : '#1e90ff',
+								            type : 'dashed'
+								        } */
 								},
+								/* dataZoom : {
+							        show : true,
+							        title : {
+							            dataZoom : '区域缩放',
+							            dataZoomReset : '区域缩放后退'
+							        }
+							    }, */
 								dataView : {
 									show : true,
 									readOnly : false
 								},
 								magicType : {
 									show : true,
-									type : [ 'line', 'bar' ]
+									type : [ 'line', 'bar']
 								},
 								restore : {
 									show : true
@@ -206,11 +225,11 @@
 				</div>
 			</div>
 			<hr>
-			
+
 		</div>
 		<div style="bottom: 0; position: fixed; width: 100%">
-				<%@include file="/adminjsps/foot.jsp"%>
-			</div>
+			<%@include file="/adminjsps/foot.jsp"%>
+		</div>
 	</c:if>
 	<c:if test="${sessionScope.level!=1}">
 		<h1 style="text-align: center">你没有权限访问此页面</h1>

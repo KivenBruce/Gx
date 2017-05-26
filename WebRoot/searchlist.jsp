@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Cubic - One Page Responsive HTML 5 Website Template</title>
+<title>Cubic - 搜索</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://localhost:8080/Gx/logo.ico" />
 

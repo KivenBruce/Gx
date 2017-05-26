@@ -83,23 +83,6 @@ public class SchoolDao {
 		}
 	}
 
-	public List<accountID> queryID(int pc) throws SQLException {
-		String sql = "select ID from  inschool limit ?,?";
-		try {
-			int ps = 5;
-			String sql1 = "select count(*) from inschool";
-			Number number = (Number) this.qr.query(sql1, new ScalarHandler());
-			int tr = number.intValue();
-			int pageCount = tr % ps == 0 ? tr / ps : tr / ps + 1;
-			if (pc >= pageCount) {
-				pc = pageCount;
-			}
-			return (List) this.qr.query(sql, new BeanListHandler(accountID.class), (pc - 1) * ps, ps);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public School findById(String Gid) {
 		String sql = "select * from sch_active where id=?";
 		try {
